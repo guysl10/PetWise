@@ -38,6 +38,16 @@ def get_adoption_days(request):
     return adoption_days.Views().get_adoption_days(request)
 
 
+@api_view(['POST'])
+def delete_adoption_day(request, document_id):
+    return adoption_days.Views().delete_adoption_days(request, document_id)
+
+
 @api_view(['GET'])
 def get_stores(request):
     return store.Views().get_stores(request)
+
+
+@api_view(['POST'])
+def delete_store(request, document_id):
+    return store.Views().delete_store(request, document_id)
