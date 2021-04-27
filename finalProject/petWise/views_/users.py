@@ -14,3 +14,12 @@ class Views:
         user_data = self.firestore_client.collection(u'users').document(user_id).get()
         print(user_data)
         return HttpResponse(str(user_data.to_dict()))
+
+    def delete_user(self, request, user_id):
+        # TODO: check if user is connected and delete subdocuments
+        self.firestore_client.collection(u'users').document(user_id).delete()
+        return HttpResponse("true")
+
+    def update_user(self, request, user_id):
+        self.firestore_client.collection(u'users').document(user_id).update(request.body())
+        return HttpResponse("true")
