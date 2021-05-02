@@ -2,7 +2,7 @@ import time
 from datetime import timedelta
 from uuid import uuid4
 
-from firebase_admin import firestore, initialize_app
+from firebase_admin import firestore, initialize_app, credentials
 
 CRED = credentials.Certificate(
 	r"petwise-547d7-firebase-adminsdk-70638-65e70cc071.json")
@@ -22,8 +22,8 @@ class Singleton(type):
 
 class PetWiseServ(metaclass=Singleton):
 	def __init__(self):
-		self.app = firebase_admin.initialize_app(CRED)
-		self.firestore_client = firestore.client(app)
+		self.app = initialize_app(CRED)
+		self.firestore_client = firestore.client(self.app)
 
 
 petwise_serv = PetWiseServ()

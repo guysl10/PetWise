@@ -1,5 +1,4 @@
 import json
-import firebase
 import requests
 from bs4 import BeautifulSoup
 from firebase import petwise_serv
