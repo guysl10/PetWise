@@ -2,6 +2,7 @@ import json
 import firebase
 import requests
 from bs4 import BeautifulSoup
+from firebase import petwise_serv
 
 
 class PetsCrawler:
@@ -12,10 +13,13 @@ class PetsCrawler:
 
 	def __init__(self):
 		with open("/opt/config.json", "rb") as f:
-			data = json.load(f)
-			self.urls = data["urls"]
+			self.urls = json.load(f)
+		# self.last_id = self.check_last_id()
 
-	# TODO: add last search id.
+	# # TODO: get last search id.
+	# def check_last_id(self):
+	# 	return 0
+
 	def scan_by_id(
 			self, site_name: str,
 			start_id: int, end_id: int,
@@ -30,7 +34,8 @@ class PetsCrawler:
 
 		return pets
 
-	def extract_info(self, html_data):
+	@staticmethod
+	def extract_info(html_data):
 		parser = BeautifulSoup(html_data)
 		bs_data = parser.find(
 			'table',
@@ -46,9 +51,18 @@ class PetsCrawler:
 					pet_data[data_title] = row.text
 		return pet_data
 
-	# def launch(self):
-	# 	for url in self.urls:
-	# 		#TODO: check from db the last id stored
-	# 		pets = self.scan_by_id(url, 2000)
+	def launch(self):
+		pets = {}
+		for url in self.urls:
+			# TODO: check from db the last id stored
+			pets = self.scan_by_id(
+				url['url'],
+				url["last_id"]+1,
+				url["last_id"]+101, url["ignore_sign"]
+			)
 
-
+		pets_db = petwise_serv.collection(
+			u'pets')
+		for result in pets:
+			for value in pets[result]:
+				pets_db.add(value)
