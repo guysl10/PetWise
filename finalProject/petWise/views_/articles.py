@@ -14,3 +14,6 @@ class Views:
     def delete_article(self, request, document_id):
         self.firestore_client.collection(u'articles').document(document_id).delete()
         return HttpResponse(f'Deleted {document_id}')
+
+    def update_article(self, request, document_id, data):
+        self.firestore_client.collection(u'articles').document(document_id).set(data)

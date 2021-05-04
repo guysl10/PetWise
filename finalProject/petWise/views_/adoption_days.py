@@ -14,3 +14,6 @@ class Views:
     def delete_adoption_days(self, request, document_id):
         self.firestore_client.collection(u'adoption_days').document(document_id).delete()
         return HttpResponse(f'Deleted {document_id}')
+
+    def update_adoption_days(self, request, document_id, data):
+        self.firestore_client.collection(u'adoption_days').document(document_id).set(data)
