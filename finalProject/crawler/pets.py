@@ -44,7 +44,7 @@ class Yad4PetsCrawler:
         parser = BeautifulSoup(data)
         counters = parser.find_all("ul", attrs="list-inline yd-head-count")
         for counter in counters:
-            if counter.find_all("span")[0].text.find("אומצו") != -1:
+            if counter.find_all("span")[0].text.find("באתר") != -1:
                 count = counter.find_all("li", "yd-head-num")[0].text.split(
                     ',')
                 count = int("".join(count))
@@ -62,11 +62,16 @@ class Yad4PetsCrawler:
             'div',
             attrs={'class': 'dog-description'}
         )
+        all_images = parser.find_all(
+            'div',
+            attrs={'class': 'carousel-inner'}
+        )[0].find_all("img")
+        images = [img["src"] for img in all_images]
 
         pet_data = {}
         for table in bs_data:
             pet_data.update(Yad4PetsCrawler.extract_table(table))
-
+        pet_data["images"] = images
         pet_data["description"] = description.text
 
         return pet_data
@@ -102,7 +107,7 @@ class Yad4PetsCrawler:
 
         self.upload_to_firestore(u'pets', pets)
 
-        self.update_config_file()
+        # self.update_config_file()
 
     @staticmethod
     def upload_to_firestore(collection_name, pets):
@@ -113,9 +118,9 @@ class Yad4PetsCrawler:
                 print(f"uploading to firestore {result} {pet_id}")
                 pets_db.add(pets[result][pet_id])
 
-    def update_config_file(self):
-        with open("./crawler/config.json", "wb") as f:
-            json.dump(self.urls, f)
+    # def update_config_file(self):
+    #     with open("./crawler/config.json", "wb") as f:
+    #         json.dump(self.urls, f)
 
 
 def main():

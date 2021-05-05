@@ -1,12 +1,12 @@
 {
   "yad4-dog": {
     "url":"https://www.yad4.co.il/dog-",
-    "last_id_scanned": 40000,
+    "last_id_scanned": 45800,
     "ignore_sign": "535x455_fill_logo.png"
   },
   "yad4-cat": {
     "url":"https://www.yad4.co.il/cat-",
-    "last_id_scanned": 40000,
+    "last_id_scanned": 45800,
     "ignore_sign": "535x455_fill_logo.png"
   }
 
