@@ -54,7 +54,7 @@ class Yad4PetsCrawler:
     def extract_info(html_data):
         # TODO: extract images of the pet.
         parser = BeautifulSoup(html_data)
-        base_data = parser.find_all(
+        bs_data = parser.find_all(
             'table',
             attrs={'class': 'table'}
         )
@@ -64,16 +64,23 @@ class Yad4PetsCrawler:
         )
 
         pet_data = {}
-        data_title = ""
-        for table in base_data:
-            for line in table.find_all("tr"):
-                for index, row in enumerate(line.find_all("td")):
-                    if index % 2 == 0:
-                        data_title = row.text
-                    else:
-                        pet_data[data_title] = row.text
+        for table in bs_data:
+            pet_data.update(Yad4PetsCrawler.extract_table(table))
 
-            pet_data["description"] = description.text
+        pet_data["description"] = description.text
+
+        return pet_data
+
+    @staticmethod
+    def extract_table(table):
+        pet_data = {}
+        data_title = ""
+        for line in table.find_all("tr"):
+            for index, row in enumerate(line.find_all("td")):
+                if index % 2 == 0:
+                    data_title = row.text
+                else:
+                    pet_data[data_title] = row.text
 
         return pet_data
 
@@ -93,15 +100,18 @@ class Yad4PetsCrawler:
                 )
                 self.urls[site]["last_id_scanned"] = end_scan
 
-        pets_db = petwise_serv.firestore_client.collection(u'pets')
+        self.upload_to_firestore(u'pets', pets)
 
+        self.update_config_file()
+
+    @staticmethod
+    def upload_to_firestore(collection_name, pets):
+        pets_db = petwise_serv.firestore_client.collection(collection_name)
         for result in pets:
             for pet_id in pets[result]:
                 # logger.info(f"uploading to firestore {result} {pet_id}")
                 print(f"uploading to firestore {result} {pet_id}")
                 pets_db.add(pets[result][pet_id])
-
-        self.update_config_file()
 
     def update_config_file(self):
         with open("./crawler/config.json", "wb") as f:
