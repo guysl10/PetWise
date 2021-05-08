@@ -65,7 +65,7 @@ class Yad4PetsCrawler:
         response = _safe_get_requests(site)
         if response is not None:
             data = response.content.decode("utf-8")
-            parser = BeautifulSoup(data)
+            parser = BeautifulSoup(data, "html.parser")
             counters = parser.find_all("ul", attrs="list-inline yd-head-count")
             for counter in counters:
                 if counter.find_all("span")[0].text.find("כלבים באתר") != -1:
@@ -84,7 +84,7 @@ class Yad4PetsCrawler:
 
         :return:
         """
-        parser = BeautifulSoup(html_data)
+        parser = BeautifulSoup(html_data, "html.parser")
         bs_data = parser.find_all(
             'table',
             attrs={'class': 'table'}
@@ -128,9 +128,7 @@ class Yad4PetsCrawler:
         return pet_table
 
     def launch(self):
-        """
-        Go over all urls and extract all new puppies from all sites.
-        """
+        """Go over all urls and extract all new puppies from all sites."""
         pets = {}
         for site in self.urls:
             end_scan = self.get_last_id(self.urls[site]['url'] + "1")
@@ -146,7 +144,7 @@ class Yad4PetsCrawler:
                 self.urls[site]["last_id_scanned"] = end_scan
 
         self.upload_to_pets_firestore(u'pets', pets)
-        self.update_config_file()
+
 
     @staticmethod
     @_log_wrapper
@@ -166,18 +164,21 @@ class Yad4PetsCrawler:
                 pets_db.add(pets[result][pet_id])
 
     def update_config_file(self):
-        with open("./crawler/config.json", "wb") as f:
+        with open("./crawler/config.json", "w") as f:
             json.dump(self.urls, f)
 
 
 @logger.catch
 def main():
     log_configure()
-    logger.info("Start scanning")
-    crawler = Yad4PetsCrawler()
-    crawler.launch()
-    logger.info("End scanning")
-    upload_logs()
+    try:
+        logger.info("Start scanning")
+        crawler = Yad4PetsCrawler()
+        crawler.launch()
+        crawler.update_config_file()
+        logger.info("End scanning")
+    finally:
+        upload_logs()
 
 
 if __name__ == '__main__':
