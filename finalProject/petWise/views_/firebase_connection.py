@@ -8,6 +8,7 @@ from singleton_decorator import singleton
 CRED = credentials.Certificate(
     os.path.join(os.path.dirname(__file__), "petwise-547d7-firebase-adminsdk-70638-65e70cc071.json"))
 
+
 @singleton
 class FirebaseConnection:
     def __init__(self):

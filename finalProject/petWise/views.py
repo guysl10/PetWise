@@ -5,12 +5,13 @@ from .views_ import users, articles, adoption, adoption_days, store, association
 
 
 def index(request):
+    # TODO:route to index
     return HttpResponse("Hello, world. You're at the polls index.")
 
 
 @api_view(['POST'])
 def add_user(request):
-    return users.Views().add_user(request)
+    return users.add_user(request)
 
 
 @api_view(['POST'])
@@ -105,9 +106,9 @@ def delete_user(request, user_id):
 
 @api_view(['POST'])
 def log_in(request):
-    return connection.Views().log_in(request)
+    return connection.log_in(request)
 
 
 @api_view(['GET'])
 def log_out(request):
-    return connection.Views().log_out(request)
+    return connection.log_out(request)
