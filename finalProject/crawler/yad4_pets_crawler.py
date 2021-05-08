@@ -1,11 +1,8 @@
 import json
 from typing import Dict
-
 import requests
 from bs4 import BeautifulSoup
 from firebase import petwise_serv
-
-
 from loguru import logger
 
 
@@ -127,7 +124,6 @@ class Yad4PetsCrawler:
         """
         pets = {}
         for site in self.urls:
-            # TODO: check from db the last id stored
             end_scan = self.get_last_id(self.urls[site]['url'] + "1")
             if end_scan != self.urls[site]["last_id_scanned"]:
                 pets.update(
@@ -141,8 +137,7 @@ class Yad4PetsCrawler:
                 self.urls[site]["last_id_scanned"] = end_scan
 
         self.upload_to_firestore(u'pets', pets)
-
-        # self.update_config_file()
+        self.update_config_file()
 
     @staticmethod
     def upload_to_firestore(
@@ -160,9 +155,9 @@ class Yad4PetsCrawler:
                 logger.info(f"uploading to firestore {result} {pet_id}")
                 pets_db.add(pets[result][pet_id])
 
-    # def update_config_file(self):
-    #     with open("./crawler/config.json", "wb") as f:
-    #         json.dump(self.urls, f)
+    def update_config_file(self):
+        with open("./crawler/config.json", "wb") as f:
+            json.dump(self.urls, f)
 
 
 def main():
