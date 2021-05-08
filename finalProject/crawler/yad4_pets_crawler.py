@@ -1,9 +1,11 @@
 import json
 from typing import Dict
-import requests
 from bs4 import BeautifulSoup
-from firebase import petwise_serv
 from loguru import logger
+
+from crawler.utils import _safe_get_requests, _log_wrapper, log_configure, \
+    upload_logs
+from firebase import petwise_serv
 
 
 class Yad4PetsCrawler:
@@ -22,7 +24,7 @@ class Yad4PetsCrawler:
             self, site_name: str,
             start_id: int, end_id: int,
             ignore_sign: str
-    ) -> Dict[str:str]:
+    ) -> Dict[str, str]:
         """
         According to start & end id, extract from site all puppies data.
 
@@ -35,14 +37,20 @@ class Yad4PetsCrawler:
         :return: All pets found inside the site between given id's.
         """
         pets = {}
+        new_pets_count = 0
+        logger.info(
+            f"Scanning {end_id - start_id + 1} id's from {start_id} - {end_id}"
+        )
         for i in range(start_id, end_id):
             logger.info(f"Scanning {site_name + str(i)}")
-            response = requests.get(site_name + str(i))
-            data = response.content.decode("utf-8")
-            if data.find(ignore_sign) == -1:
-                pets[i] = self.extract_info(data)
-                pets[i]["url"] = site_name + str(i)
-
+            response = _safe_get_requests(site_name + str(i))
+            if response is not None:
+                data = response.content.decode("utf-8")
+                if data.find(ignore_sign) == -1:
+                    new_pets_count += 1
+                    pets[i] = self.extract_info(data)
+                    pets[i]["url"] = site_name + str(i)
+        logger.info(f"Found {new_pets_count}/{end_id - start_id + 1} new pets")
         return pets
 
     @staticmethod
@@ -54,19 +62,21 @@ class Yad4PetsCrawler:
 
         :return: the newest puppy id.
         """
-        response = requests.get(site)
-        data = response.content.decode("utf-8")
-        parser = BeautifulSoup(data)
-        counters = parser.find_all("ul", attrs="list-inline yd-head-count")
-        for counter in counters:
-            if counter.find_all("span")[0].text.find("באתר") != -1:
-                count = counter.find_all("li", "yd-head-num")[0].text.split(
-                    ',')
-                count = int("".join(count))
-                return count - 1
+        response = _safe_get_requests(site)
+        if response is not None:
+            data = response.content.decode("utf-8")
+            parser = BeautifulSoup(data)
+            counters = parser.find_all("ul", attrs="list-inline yd-head-count")
+            for counter in counters:
+                if counter.find_all("span")[0].text.find("כלבים באתר") != -1:
+                    count = counter.find_all("li", "yd-head-num")[
+                        0].text.split(
+                        ',')
+                    count = int("".join(count))
+                    return count - 1
 
     @staticmethod
-    def extract_info(html_data: str) -> Dict[str: str]:
+    def extract_info(html_data: str) -> Dict[str, str]:
         """
         Extract all info about puppi from given html info page about puppy.
 
@@ -74,7 +84,6 @@ class Yad4PetsCrawler:
 
         :return:
         """
-        # TODO: extract images of the pet.
         parser = BeautifulSoup(html_data)
         bs_data = parser.find_all(
             'table',
@@ -99,7 +108,7 @@ class Yad4PetsCrawler:
         return pet_data
 
     @staticmethod
-    def extract_table(table) -> Dict[str: str]:
+    def extract_table(table) -> Dict[str, str]:
         """
         Take all data from given bs4 table about puppy.
 
@@ -136,12 +145,13 @@ class Yad4PetsCrawler:
                 )
                 self.urls[site]["last_id_scanned"] = end_scan
 
-        self.upload_to_firestore(u'pets', pets)
+        self.upload_to_pets_firestore(u'pets', pets)
         self.update_config_file()
 
     @staticmethod
-    def upload_to_firestore(
-            collection_name: str, pets: Dict[str: Dict[str: str]]
+    @_log_wrapper
+    def upload_to_pets_firestore(
+            collection_name: str, pets: Dict[str, Dict[str, str]]
     ):
         """
         Connect to firestore inside firebase and upload all new puppies found.
@@ -160,9 +170,14 @@ class Yad4PetsCrawler:
             json.dump(self.urls, f)
 
 
+@logger.catch
 def main():
+    log_configure()
+    logger.info("Start scanning")
     crawler = Yad4PetsCrawler()
     crawler.launch()
+    logger.info("End scanning")
+    upload_logs()
 
 
 if __name__ == '__main__':
