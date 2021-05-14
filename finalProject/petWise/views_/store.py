@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from .firebase_connection import FirebaseConnection
 from singleton_decorator import singleton
 
+
 @singleton
 class Views:
     def __init__(self):
@@ -17,4 +18,3 @@ class Views:
 
     def update_store(self, request, document_id, data):
         self.firestore_client.collection(u'pet_store').document(document_id).set(data)
-

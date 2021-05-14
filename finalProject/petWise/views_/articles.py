@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from .firebase_connection import FirebaseConnection
 from singleton_decorator import singleton
 
+
 @singleton
 class Views:
     def __init__(self):
