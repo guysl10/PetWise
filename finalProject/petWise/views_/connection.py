@@ -1,6 +1,6 @@
 import pyrebase
 from django.http import HttpResponse
-from singleton import singleton
+from singleton_decorator import singleton
 
 
 @singleton
