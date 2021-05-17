@@ -1,6 +1,6 @@
 import json
 import uuid
-from typing import Dict, List
+from typing import Dict, List, Union
 from bs4 import BeautifulSoup
 from loguru import logger
 
@@ -21,7 +21,16 @@ class Yad4PetsCrawler:
             data = json.load(f)
             self.urls = data
 
-    def try_extract_pet_from_site(self, site_name: str, ignore_sign: str):
+    def try_extract_pet_from_site(
+            self, site_name: str, ignore_sign: str
+    ) -> Union[Dict[str, str], None]:
+        """
+
+        :param site_name: Full url to extract pet from
+        :param ignore_sign: If this sign found inside get request, skip to
+        next id.
+        :return: None if no pet was found, else the pet
+        """
         logger.info(f"Scanning {site_name}")
         response = _safe_get_requests(f"{site_name}")
         if response is not None:
