@@ -25,19 +25,8 @@ def get_user(request, user_id):
 
 
 @api_view(['GET'])
-def get_articles(request):
-    return articles.Views().get_articles(request)
-
-
-@api_view(['DELETE'])
-def delete_article(request, document_id):
-    return articles.Views().delete_article(request, document_id)
-
-
-@api_view(['POST'])
-def edit_article(request, document_id, data):
-    return articles.Views().update_article(request, document_id, data)
-
+def get_articles(request, search='אימוץ חיות'):
+    return articles.Views().get_articles(request, search)
 
 @api_view(['GET'])
 def get_adoption(request, pet_kind):
