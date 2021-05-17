@@ -70,7 +70,7 @@ class Yad4PetsCrawler:
                                                  f"{str(i)}", ignore_sign)
             if pet is None:
                 pet = self.try_extract_pet_from_site(
-                    f"{site_name}{options[0]}-"
+                    f"{site_name}{options[1]}-"
                     f"{str(i)}", ignore_sign)
             if pet is not None:
                 pets[i] = pet
