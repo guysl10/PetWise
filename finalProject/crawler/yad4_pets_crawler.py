@@ -1,5 +1,6 @@
 import json
-from typing import Dict
+import uuid
+from typing import Dict, List
 from bs4 import BeautifulSoup
 from loguru import logger
 
@@ -20,15 +21,29 @@ class Yad4PetsCrawler:
             data = json.load(f)
             self.urls = data
 
+    def try_extract_pet_from_site(self, site_name: str, ignore_sign: str):
+        logger.info(f"Scanning {site_name}")
+        response = _safe_get_requests(f"{site_name}")
+        if response is not None:
+            data = response.content.decode("utf-8")
+            if data.find(ignore_sign) == -1:
+                pet = self.extract_info(data)
+                pet["url"] = site_name
+                pet["id"] = str(uuid.uuid1())
+                return pet
+            else:
+                return None
+
     def scan_by_id(
-            self, site_name: str,
+            self, site_name: str, options: List[str],
             start_id: int, end_id: int,
             ignore_sign: str
-    ) -> Dict[str, str]:
+    ) -> Dict[int, Dict[str, str]]:
         """
         According to start & end id, extract from site all puppies data.
 
         :param site_name: Base url for requests.
+        :param options: all options of pets.
         :param start_id: Start range for scanning.
         :param end_id: End range for scanning.
         :param ignore_sign: If this sign found inside get request, skip to
@@ -42,14 +57,16 @@ class Yad4PetsCrawler:
             f"Scanning {end_id - start_id + 1} id's from {start_id} - {end_id}"
         )
         for i in range(start_id, end_id):
-            logger.info(f"Scanning {site_name + str(i)}")
-            response = _safe_get_requests(site_name + str(i))
-            if response is not None:
-                data = response.content.decode("utf-8")
-                if data.find(ignore_sign) == -1:
-                    new_pets_count += 1
-                    pets[i] = self.extract_info(data)
-                    pets[i]["url"] = site_name + str(i)
+            pet = self.try_extract_pet_from_site(f"{site_name}{options[0]}-"
+                                                 f"{str(i)}", ignore_sign)
+            if pet is None:
+                pet = self.try_extract_pet_from_site(
+                    f"{site_name}{options[0]}-"
+                    f"{str(i)}", ignore_sign)
+            if pet is not None:
+                pets[i] = pet
+                new_pets_count += 1
+
         logger.info(f"Found {new_pets_count}/{end_id - start_id + 1} new pets")
         return pets
 
@@ -131,11 +148,12 @@ class Yad4PetsCrawler:
         """Go over all urls and extract all new puppies from all sites."""
         pets = {}
         for site in self.urls:
-            end_scan = self.get_last_id(self.urls[site]['url'] + "1")
+            end_scan = self.get_last_id(f"{self.urls[site]['url']}dog-1")
             if end_scan != self.urls[site]["last_id_scanned"]:
                 pets.update(
                     {site: self.scan_by_id(
                         self.urls[site]['url'],
+                        ['dog', 'cat'],
                         self.urls[site]["last_id_scanned"] + 1,
                         end_scan,
                         self.urls[site]["ignore_sign"]
@@ -144,7 +162,6 @@ class Yad4PetsCrawler:
                 self.urls[site]["last_id_scanned"] = end_scan
 
         self.upload_to_pets_firestore(u'pets', pets)
-
 
     @staticmethod
     @_log_wrapper
@@ -161,7 +178,8 @@ class Yad4PetsCrawler:
         for result in pets:
             for pet_id in pets[result]:
                 logger.info(f"uploading to firestore {result} {pet_id}")
-                pets_db.add(pets[result][pet_id])
+                pets_db.document(pets[result][pet_id]['id']).set(
+                    pets[result][pet_id])
 
     def update_config_file(self):
         with open("./crawler/config.json", "w") as f:

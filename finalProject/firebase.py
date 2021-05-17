@@ -6,7 +6,8 @@ from loguru import logger
 from firebase_admin import firestore, initialize_app, credentials
 
 CRED = credentials.Certificate(
-	r"petwise-547d7-firebase-adminsdk-70638-65e70cc071.json")
+	r"petwise-547d7-4bb8fbabc376.json")
+
 
 
 class Singleton(type):
