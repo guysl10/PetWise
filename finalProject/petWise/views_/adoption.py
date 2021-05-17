@@ -8,6 +8,10 @@ class Views:
     def __init__(self):
         self.firestore_client = FirebaseConnection().firestore_client
 
+    def get_adoption_by_id(self, document_id):
+        adoption = self.firestore_client.collection(u'adoption').document(document_id).get()
+        return HttpResponse(adoption)
+
     def get_adoption(self, request, pet_kind):
         adoptions = [doc.get().to_dict() for doc in self.firestore_client.collection(u'adoption').list_documents() if
                      str(doc.get().to_dict().get('kind')) == pet_kind]

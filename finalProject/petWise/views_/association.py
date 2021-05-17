@@ -8,6 +8,10 @@ class Views:
     def __init__(self):
         self.firestore_client = FirebaseConnection().firestore_client
 
+    def get_association_by_id(self, request, document_id):
+        association = self.firestore_client.collection(u'association').document(document_id).get()
+        return HttpResponse(association)
+
     def get_association(self, request):
         associations = [doc.get().to_dict() for doc in
                         self.firestore_client.collection(u'association').list_documents()]
