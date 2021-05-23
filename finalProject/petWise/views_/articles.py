@@ -8,6 +8,10 @@ class Views:
     def __init__(self):
         self.firestore_client = FirebaseConnection().firestore_client
 
+    def get_article_by_id(self, document_id):
+        article = self.firestore_client.collection(u'articles').document(document_id).get()
+        return HttpResponse(article)
+
     def get_articles(self, request):
         articles = [doc.get().to_dict() for doc in self.firestore_client.collection(u'article').list_documents()]
         return HttpResponse(str(articles))
