@@ -114,7 +114,9 @@ def search_page_of_items(
     response = api.execute('findItemsByKeywords', request)
     new_items = response.dict()["searchResult"]["item"]
     new_items = {
-        item["id"]: translate_response(filter_item(item)) for item in
+        item["id"]: translate_response(filter_item(item, keyword.split(' ')))
+        for
+        item in
         new_items
     }
     utils.upload_items_to_firestore("products", new_items)
