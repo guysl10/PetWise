@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from loguru import logger
 
 from crawler.utils import _safe_get_requests, _log_wrapper, log_configure, \
-    upload_logs
+    upload_logs, upload_items_to_firestore
 from firebase import petwise_serv
 
 
@@ -170,25 +170,7 @@ class Yad4PetsCrawler:
                 )
                 self.urls[site]["last_id_scanned"] = end_scan
 
-        self.upload_to_pets_firestore(u'pets', pets)
-
-    @staticmethod
-    @_log_wrapper
-    def upload_to_pets_firestore(
-            collection_name: str, pets: Dict[str, Dict[str, str]]
-    ):
-        """
-        Connect to firestore inside firebase and upload all new puppies found.
-
-        :param collection_name: table name to upload all data to.
-        :param pets: All puppies data to upload to firestore.
-        """
-        pets_db = petwise_serv.firestore_client.collection(collection_name)
-        for result in pets:
-            for pet_id in pets[result]:
-                logger.info(f"uploading to firestore {result} {pet_id}")
-                pets_db.document(pets[result][pet_id]['id']).set(
-                    pets[result][pet_id])
+        upload_items_to_firestore(u'pets', pets)
 
     def update_config_file(self):
         with open("./crawler/config.json", "w") as f:
