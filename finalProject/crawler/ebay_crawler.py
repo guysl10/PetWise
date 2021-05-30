@@ -4,8 +4,8 @@ import yaml
 from ebaysdk.finding import Connection
 import utils
 
-ITEMS = 3
-PAGES = 1
+ITEMS = 50
+PAGES = 10
 
 
 def generate_request(
@@ -64,7 +64,7 @@ def get_all_keywords() -> List[str]:
 
     :return: All permutations of keywords.
     """
-    with open('/home/guy/PycharmProjects/PetWise/finalProject/crawler/product_keywords.yaml') as f:
+    with open('product_keywords.yaml') as f:
         keywords = yaml.full_load(f)
 
     types = [keywords[t] for t in keywords]
@@ -143,6 +143,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-# production in server..
-# logs...
-# petfinder...
