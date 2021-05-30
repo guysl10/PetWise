@@ -55,17 +55,16 @@ def upload_logs():
 def translate(text: str) -> str:
     """Translate via Morfix hebrew<->english."""
     response = _safe_get_requests(f"{MORFIX}{text}")
-    parsed_html = BeautifulSoup(response.content, "lxml")
     try:
-        result = parsed_html.body.find('div', attrs={
-            'class': 'MachineTranslation_divfootertop_heToen'}).text
-    except AttributeError:
+        parsed_html = BeautifulSoup(response.content, "lxml")
         try:
             result = parsed_html.body.find('div', attrs={
                 'class': 'MachineTranslation_divfootertop_enTohe'}).text
         except AttributeError:
-            # raise ValueError(f"Translate `{text}` failed.")
-            result = text
+            result = parsed_html.body.find('div', attrs={
+                'class': 'MachineTranslation_divfootertop_heToen'}).text
+    except AttributeError:
+        result = text
     return result
 
 
@@ -81,11 +80,9 @@ def upload_items_to_firestore(
     """
     items_db = firebase.petwise_serv.firestore_client.collection(
         collection_name)
-    for result in items:
-        for item_id in items[result]:
-            logger.info(f"uploading to firestore {result} {item_id}")
-            items_db.document(items[result][item_id]['id']).set(
-                items[result][item_id])
+    for item_id in items:
+        logger.info(f"uploading to firestore {item_id}")
+        items_db.document(item_id).set(items[item_id])
 
 
 def camel_case_to_regular_case(name: str):

@@ -4,8 +4,8 @@ import yaml
 from ebaysdk.finding import Connection
 import utils
 
-ITEMS = 50
-PAGES = 10
+ITEMS = 3
+PAGES = 1
 
 
 def generate_request(
@@ -37,7 +37,8 @@ def translate_response(
     """Translate all items of response data."""
     new_response = {}
     for item in data:
-        if item in ['url', 'id']:
+        if item in ['url', 'id', 'picture']:
+            new_response[item] = data[item]
             continue
         if isinstance(item, str):
             translated_item = utils.translate(item)
@@ -63,7 +64,7 @@ def get_all_keywords() -> List[str]:
 
     :return: All permutations of keywords.
     """
-    with open('crawler/product_keywords.yaml') as f:
+    with open('/home/guy/PycharmProjects/PetWise/finalProject/crawler/product_keywords.yaml') as f:
         keywords = yaml.full_load(f)
 
     types = [keywords[t] for t in keywords]
@@ -74,13 +75,26 @@ def filter_item(
         item: Dict[str, Union[str, List, Dict]], keywords: List[str]
 ) -> Dict[str, Union[str, List, Dict]]:
     filtered_item = {}
-    filtered_item['id'] = item['itemID']
-    filtered_item['title'] = item['title']
-    filtered_item['subtitle'] = item['subtitle']
-    filtered_item['type'] = item['categoryName']
-    filtered_item['picture'] = item['galleryURL']
-    filtered_item['url'] = item['viewItemURL']
-    filtered_item['price'] = item['shippingServiceCost']['value']
+    converted_keys = {
+        'itemId': 'id',
+        'title': 'title',
+        'subtitle': 'subtitle',
+        'categoryName': 'type',
+        'galleryURL': 'picture',
+        'viewItemURL': 'url',
+        'shippingServiceCost': {'value': 'price'},
+        'value': 'price'
+    }
+    for key in converted_keys:
+        if key in item:
+            if isinstance(item[key], str):
+                filtered_item[converted_keys[key]] = item[key]
+            elif isinstance(item[key], Dict):
+                filtered_item[converted_keys[key]] = filter_item(
+                    item[key], keywords
+                )
+
+    # filtered_item['price'] = item['shippingServiceCost']['value']
     filtered_item['labels'] = keywords
     return filtered_item
 
@@ -95,7 +109,7 @@ def search_by_keywords(items_per_page: int = ITEMS, num_pages: int = PAGES):
     api = Connection(config_file='ebay.yaml', siteid='EBAY-US')
     keywords = get_all_keywords()
     for keyword in keywords:
-        for page_number in range(num_pages):
+        for page_number in range(1, num_pages+1):
             search_page_of_items(api, keyword, items_per_page, page_number)
 
 
@@ -114,7 +128,7 @@ def search_page_of_items(
     response = api.execute('findItemsByKeywords', request)
     new_items = response.dict()["searchResult"]["item"]
     new_items = {
-        item["id"]: translate_response(filter_item(item, keyword.split(' ')))
+        item["itemId"]: translate_response(filter_item(item, keyword.split(' ')))
         for
         item in
         new_items
@@ -128,3 +142,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# production in server..
+# logs...
+# petfinder...
