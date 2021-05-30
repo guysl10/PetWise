@@ -8,11 +8,15 @@ class Views:
     def __init__(self):
         self.firestore_client = FirebaseConnection().firestore_client
 
-    def get_articles(self, request, search='חיות'):
-        googlenews = GoogleNews(lang='he', period='7d', encode='utf-8')
-        googlenews.search(search)
-        articles = []
-        for i in range(5):
-            articles.extend(googlenews.page_at(i))
-        return HttpResponse(articles)
+    def get_article_by_id(self, document_id):
+        article = self.firestore_client.collection(u'articles').document(document_id).get()
+        return HttpResponse(article)
+
+    def get_articles(self, request):
+        articles = [doc.get().to_dict() for doc in self.firestore_client.collection(u'article').list_documents()]
+        return HttpResponse(str(articles))
+
+    def delete_article(self, request, document_id):
+        self.firestore_client.collection(u'articles').document(document_id).delete()
+        return HttpResponse(f'Deleted {document_id}')
 

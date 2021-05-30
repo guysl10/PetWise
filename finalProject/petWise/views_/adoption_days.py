@@ -8,6 +8,10 @@ class Views:
     def __init__(self):
         self.firestore_client = FirebaseConnection().firestore_client
 
+    def get_adoption_day_by_id(self, request, document_id):
+        adoption_day = self.firestore_client.collection(u'adoption_days').document(document_id).get()
+        return HttpResponse(adoption_day)
+
     def get_adoption_days(self, request):
         adoption_days = [doc.get().to_dict() for doc in
                          self.firestore_client.collection(u'adoption_days').list_documents()]
