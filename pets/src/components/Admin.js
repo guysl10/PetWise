@@ -41,7 +41,6 @@ class Admin extends Component {
                     <div className="w3-main" style={{ marginLeft: '300px', marginTop: '43px' }}>
                         {/* Header */}
                         <header className="w3-container" style={{ paddingTop: '22px' }}>
-                            <h5><b><i className="fa fa-dashboard" /> My Dashboard</b></h5>
                         </header>
                         <div className="w3-row-padding w3-margin-bottom">
                             <div className="w3-quarter">
@@ -51,7 +50,7 @@ class Admin extends Component {
                                         <h3>52</h3>
                                     </div>
                                     <div className="w3-clear" />
-                                    <h4>Articles</h4>
+                                    <h4>מאמרים</h4>
                                 </div>
                             </div>
                             <div className="w3-quarter">
@@ -61,7 +60,7 @@ class Admin extends Component {
                                         <h3>99</h3>
                                     </div>
                                     <div className="w3-clear" />
-                                    <h4>Pets</h4>
+                                    <h4>חיות</h4>
                                 </div>
                             </div>
                             <div className="w3-quarter">
@@ -71,7 +70,7 @@ class Admin extends Component {
                                         <h3>23</h3>
                                     </div>
                                     <div className="w3-clear" />
-                                    <h4>Adoptions</h4>
+                                    <h4>ימי אימוץ</h4>
                                 </div>
                             </div>
                             <div className="w3-quarter">
@@ -81,18 +80,19 @@ class Admin extends Component {
                                         <h3>50</h3>
                                     </div>
                                     <div className="w3-clear" />
-                                    <h4>Users</h4>
+                                    <h4>יוזרים</h4>
                                 </div>
                             </div>
                         </div>
                         <div className="w3-panel">
                             <div className="w3-row-padding" style={{ margin: '0 -16px' }}>
                                 <div className="w3-third">
-                                    <h5>Locations</h5>
-                                    <img src="../assets/images/region.jpg" style={{ width: '100%' }} alt="Google Regional Map" />
+                                    <h5 style={{ textAlign: "right"}}>מקומות</h5>
+                                    {/* <img src="../assets/images/region.jpg" style={{ width: '100%' }} alt="Google Regional Map" /> */}
+                                    <iframe id="map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBufoc-dBsxm2QxbhuTBiyMJeWt9qweK1U&q=tel-aviv"></iframe>
                                 </div>
                                 <div className="w3-twothird">
-                                    <h5>Feeds</h5>
+                                    <h5 style={{ textAlign: "right", padding: "0 1%"}}>עדכונים</h5>
                                     <table className="w3-table w3-striped w3-white">
                                         <tbody><tr>
                                             <td><i className="fa fa-user w3-text-blue w3-large" /></td>
@@ -135,72 +135,38 @@ class Admin extends Component {
                         </div>
                         <hr />
                         <div className="w3-container">
-                            <h5>General Stats</h5>
-                            <p>New Visitors</p>
+                            <h5 style={{ textAlign: "right", padding: "0 1%"}}>עוד נתונים</h5>
+                            <p style={{ textAlign: "right", padding: "0 1%"}}>מבקרים חדשים</p>
                             <div className="w3-grey">
                                 <div className="w3-container w3-center w3-padding" style={{ width: '25%' , backgroundColor:"#00bd56"}}>+25%</div>
                             </div>
-                            <p>New Users</p>
+                            <p style={{ textAlign: "right", padding: "0 1%"}}>משתמשים חדשים</p>
                             <div className="w3-grey">
                                 <div className="w3-container w3-center w3-padding" style={{ width: '50%', backgroundColor:"#00bd56" }}>50%</div>
                             </div>
-                            <p>Bounce Rate</p>
-                            <div className="w3-grey">
-                                <div className="w3-container w3-center w3-padding" style={{ width: '75%', backgroundColor:"#00bd56" }}>75%</div>
-                            </div>
                         </div>
                         <hr />
-                        {/* <div className="w3-container">
-                            <h5>Countries</h5>
-                            <table className="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-                                <tbody><tr>
-                                    <td>United States</td>
-                                    <td>65%</td>
-                                </tr>
-                                    <tr>
-                                        <td>UK</td>
-                                        <td>15.7%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Russia</td>
-                                        <td>5.6%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Spain</td>
-                                        <td>2.1%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>India</td>
-                                        <td>1.9%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>France</td>
-                                        <td>1.5%</td>
-                                    </tr>
-                                </tbody></table><br />
-                            <button className="w3-button w3-dark-grey">More Countries &nbsp;<i className="fa fa-arrow-right" /></button>
-                        </div> */}
                         <hr />
                         <div className="w3-container">
-                            <h5>Recent Pets</h5>
+                            <h5 style={{ textAlign: "right", padding: "0 1%"}}>חיות שנוספו לאחרונה</h5>
                             <ul className="w3-ul w3-card-4 w3-white">
-                                <li className="w3-padding-16">
-                                    <img src="../assets/images/gallery-5.jpg" className="w3-left w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">Mike</span><br />
+                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
+                                    <img src="../assets/images/gallery-5.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
+                                    <span className="">מיקי</span><br />
                                 </li>
-                                <li className="w3-padding-16">
-                                    <img src="../assets/images/gallery-6.jpg" className="w3-left w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">Jill</span><br />
+                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
+                                    <img src="../assets/images/gallery-6.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
+                                    <span className="">סימבה</span><br />
                                 </li>
-                                <li className="w3-padding-16">
-                                    <img src="../assets/images/gallery-7.jpg" className="w3-left w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">Jane</span><br />
+                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
+                                    <img src="../assets/images/gallery-7.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
+                                    <span className="">קייט</span><br />
                                 </li>
                             </ul>
                         </div>
                         <hr />
                         <div className="w3-container">
-                            <h5>Recent Adoptions</h5>
+                            <h5 style={{ textAlign: "right", padding: "0 1%"}}>ימי אימוץ שנוספו לאחרונה</h5>
                             <div className="w3-row">
                                 <div className="w3-col m2 text-center">
                                     <img className="w3-circle" src="../assets/images/image_1.jpg" style={{ width: '96px', height: '96px' }} />

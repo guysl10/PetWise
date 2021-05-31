@@ -13,9 +13,12 @@ class adoptionsGallery extends Component {
             <div className="overlay" />
             <div className="container">
               <div className="row no-gutters slider-text align-items-end">
-                <div className="col-md-9 pb-5">
-                  <p className="breadcrumbs mb-2"><span className="mr-2"><a href="/">Home <i className="ion-ios-arrow-forward" /></a></span> <span>Adoption <i className="ion-ios-arrow-forward" /></span></p>
-                  <h1 className="mb-0 bread">Adoption suggestions</h1>
+                <div className="col-md-9 pb-5" style={{textAlign: "right", margin: "0 auto"}}>
+                  <p className="breadcrumbs mb-2">
+                  <span>אימוץ <i className="ion-ios-arrow-forward" /></span>
+                  <span className="mr-2"><a href="/">בית <i className="ion-ios-arrow-forward" /></a></span> 
+                  </p>
+                  <h1 className="mb-0 bread">הצעות אימוץ</h1>
                 </div>
               </div>
             </div>
@@ -168,20 +171,21 @@ export default adoptionsGallery;
 
 // export default function AdoptionsGallery() {
 
-//   // const express = require("express")
-//   // const app = express()
-//   // const cors = require("cors")
-  
-//   // app.use(cors())
 
 //   const [pets, setPets] = React.useState([]);
 
 //   React.useEffect(() => {
-//     fetch('http://localhost:8000/petWise/adoption_days/',)
-//       .then(response => response.json()).then(
+//     fetch('http://localhost:8000/petWise/adoption_days/')
+//       .then(response => response.json())
+//       .then(
 //         data => setPets(data)
 //       )
 //   }, [])
+// //   .then(response => response.json())
+// //     .then(response => {
+// //         console.log(response)
+// //     })
+// // }, [])
 
 //   return (
 //     <>
@@ -200,9 +204,9 @@ export default adoptionsGallery;
 //         <section className="ftco-section">
 //           <div className="container">
 //             <div className="row">
-//               {/* {pets.map((data, key) => {
-//                 return <petGalleryItem key={key} description={data.description} date={data.created} username={data.username} />
-//               })} */}
+//               {pets.map((data, key) => {
+//                 return <petGalleryItem key={key} description={data.description} date={data.created} />
+//               })}
 //             </div>
 //             <div className="row mt-5">
 //               <div className="col text-center">

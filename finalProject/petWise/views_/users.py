@@ -5,10 +5,6 @@ from .firebase_connection import FirebaseConnection
 from singleton_decorator import singleton
 
 
-def add_user(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-
 def create_user(user_id, email):
     return auth.create_user(email=email, uid=user_id) if user_id else auth.create_user(email=email)
 

@@ -12,10 +12,13 @@ class articles extends Component {
           <div className="overlay" />
           <div className="container">
             <div className="row no-gutters slider-text align-items-end">
-              <div className="col-md-9 pb-5">
-                <p className="breadcrumbs mb-2"><span className="mr-2"><a href="index.html">Home <i className="ion-ios-arrow-forward" /></a></span> <span>Articles <i className="ion-ios-arrow-forward" /></span></p>
-                <h1 className="mb-0 bread">Articles</h1>
-              </div>
+            <div className="col-md-9 pb-5" style={{textAlign: "right", margin: "0 auto"}}>
+                  <p className="breadcrumbs mb-2">
+                  <span>מאמרים <i className="ion-ios-arrow-forward" /></span>
+                  <span className="mr-2"><a href="/">בית <i className="ion-ios-arrow-forward" /></a></span> 
+                  </p>
+                  <h1 className="mb-0 bread">מאמרים</h1>
+                </div>
             </div>
           </div>
         </section>
