@@ -6,6 +6,7 @@ import AdminPets from './components/AdminPets';
 import AdminViewPet from './components/AdminViewPet';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import about from './pages/about';
 import adoptionsGallery from './pages/adoptionsGallery';
 import articles from './pages/articles';
 import home from './pages/home';
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/adminViewPet" component={AdminViewPet} />
           <Route exact path="/articles" component={articles} />
           <Route exact path="/adoptionsGallery" component={adoptionsGallery} />
+          <Route exact path="/about" component={about} />
         </Switch>
       </Router>
 

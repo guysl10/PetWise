@@ -6747,9 +6747,9 @@ button.bg-dark:focus {
 .my-auto {
   margin-bottom: auto !important; }
 
-.ml-auto,
+/* .ml-auto,
 .mx-auto {
-  margin-left: auto !important; }
+  margin-left: auto !important; } */
 
 @media (min-width: 576px) {
   .m-sm-0 {

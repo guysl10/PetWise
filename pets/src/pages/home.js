@@ -24,8 +24,8 @@ class home extends Component {
                             <div className="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true" 
                             style={{ height: '100vh' }} >
                                 <div className="col-md-11 text-center">
-                                    <h1 className="mb-4">Helping animal lovers to find, manage and filter all the information about animals. </h1>
-                                    <p><a href="/adoptionsGallery" className="btn btn-primary mr-md-4 py-3 px-4">Learn more <span className="ion-ios-arrow-forward" /></a></p>
+                                    <h1 className="mb-4">עוזרים לאוהבי החיות למצוא את כל המידע הדרוש במקום אחד </h1>
+                                    <p><a href="/adoptionsGallery" className="btn btn-primary mr-md-4 py-3 px-4">..למד עוד <span className="ion-ios-arrow-forward" /></a></p>
                                 </div>
                             </div>
                         </div>
