@@ -1,4 +1,4 @@
-from .consts import WORDS
+from consts import WORDS
 
 
 class Attributes:
@@ -13,6 +13,8 @@ class Attributes:
         return self._attributes
 
     def get_score(self) -> float:
+        if not len(self._attributes):
+            return 0
         return float(len(self._words)) / len(self._attributes)
 
     def _find_attributes(self) -> list:
