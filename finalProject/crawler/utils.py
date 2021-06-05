@@ -48,8 +48,9 @@ def upload_logs():
     """Upload log file to firebase."""
     with open("petwise.log", "r") as f:
         log_data = f.readlines()
-    logs_db = db_serv.petwise_serv.firestore_client.collection("yad4_logs")
-    logs_db.add({date.today().strftime("%d/%m/%Y"): log_data})
+    db_serv.petwise_serv.insert_many(
+        "yad4_logs", {date.today().strftime("%d/%m/%Y"): log_data}
+    )
 
 
 def translate(text: str) -> str:

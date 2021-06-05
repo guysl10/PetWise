@@ -1,3 +1,4 @@
+import uuid
 from typing import Dict
 
 import pymongo
@@ -66,7 +67,10 @@ class MongoPetwiseServ(metaclass=Singleton):
         """
         mycol = self.mydb[collection_name]
         for key in items:
-            mycol.insert(items[key])
+            if isinstance(items[key], Dict):
+                mycol.insert(items[key])
+            else:
+                mycol.insert({key: items[key]})
 
 
 # Working with Firebase:

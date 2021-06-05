@@ -5,8 +5,8 @@ from ebaysdk.finding import Connection
 import utils
 from db_serv import petwise_serv
 
-ITEMS = 50
-PAGES = 10
+ITEMS = 1
+PAGES = 1
 
 
 def generate_request(
@@ -77,7 +77,7 @@ def filter_item(
 ) -> Dict[str, Union[str, List, Dict]]:
     filtered_item = {}
     converted_keys = {
-        'itemId': 'id',
+        'itemId': '_id',
         'title': 'title',
         'subtitle': 'subtitle',
         'categoryName': 'type',
@@ -135,14 +135,8 @@ def search_page_of_items(
         item in
         results
     }
-    new_items = {}
-    for item in results:
-        new_item = translate_response(filter_item(item, keyword.split(' ')))
-        new_item['_id'] = item['itemId']
-        new_item.pop('itemId')
-        new_items[new_item['_id']] = new_item
 
-    petwise_serv.inser_many("products", new_items)
+    petwise_serv.insert_many("products", results)
 
 
 def main():

@@ -17,7 +17,12 @@ class Yad4PetsCrawler:
     """
 
     def __init__(self):
-        with open("./crawler/config.json", "rb") as f:
+        # with open("./crawler/config.json", "rb") as f:
+        with open(
+                "/home/guy/PycharmProjects/PetWise/finalProject/crawler"
+                "/config.json",
+                "rb"
+        ) as f:
             data = json.load(f)
             self.urls = data
 
@@ -170,10 +175,16 @@ class Yad4PetsCrawler:
                 )
                 self.urls[site]["last_id_scanned"] = end_scan
 
-        petwise_serv.inser_many(u'pets', pets)
+        for key in pets:
+            petwise_serv.insert_many(u'pets', pets[key])
 
     def update_config_file(self):
-        with open("./crawler/config.json", "w") as f:
+        # with open("./crawler/config.json", "w") as f:
+        with open(
+            "/home/guy/PycharmProjects/PetWise/finalProject/crawler"
+            "/config.json",
+            "w"
+        ) as f:
             json.dump(self.urls, f)
 
 
