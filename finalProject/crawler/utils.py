@@ -6,7 +6,7 @@ from typing import Callable, Union, Dict
 import requests
 from bs4 import BeautifulSoup
 from loguru import logger
-import firebase
+import db_serv
 
 # base URL
 MORFIX = 'https://www.morfix.co.il/'
@@ -25,7 +25,7 @@ def _safe_get_requests(*args, **kwargs) -> Union[requests.Response, None]:
         return response
 
 
-def _log_wrapper(function: Callable):
+def log_wrapper(function: Callable):
     """Describe the state of running callable with logs."""
 
     def wrapper(*args, **kwargs):
@@ -48,7 +48,7 @@ def upload_logs():
     """Upload log file to firebase."""
     with open("petwise.log", "r") as f:
         log_data = f.readlines()
-    logs_db = firebase.petwise_serv.firestore_client.collection("yad4_logs")
+    logs_db = db_serv.petwise_serv.firestore_client.collection("yad4_logs")
     logs_db.add({date.today().strftime("%d/%m/%Y"): log_data})
 
 
@@ -66,23 +66,6 @@ def translate(text: str) -> str:
     except AttributeError:
         result = text
     return result
-
-
-@_log_wrapper
-def upload_items_to_firestore(
-        collection_name: str, items: Dict[str, Dict[str, str]]
-):
-    """
-    Connect to firestore inside firebase and upload all new items.
-
-    :param collection_name: table name to upload all data to.
-    :param items: All items data to upload to firestore.
-    """
-    items_db = firebase.petwise_serv.firestore_client.collection(
-        collection_name)
-    for item_id in items:
-        logger.info(f"uploading to firestore {item_id}")
-        items_db.document(item_id).set(items[item_id])
 
 
 def camel_case_to_regular_case(name: str):

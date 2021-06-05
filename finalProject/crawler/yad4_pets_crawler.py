@@ -4,9 +4,9 @@ from typing import Dict, List, Union
 from bs4 import BeautifulSoup
 from loguru import logger
 
-from crawler.utils import _safe_get_requests, _log_wrapper, log_configure, \
-    upload_logs, upload_items_to_firestore
-from firebase import petwise_serv
+from crawler.utils import _safe_get_requests, log_wrapper, log_configure, \
+    upload_logs
+from db_serv import petwise_serv
 
 
 class Yad4PetsCrawler:
@@ -170,7 +170,7 @@ class Yad4PetsCrawler:
                 )
                 self.urls[site]["last_id_scanned"] = end_scan
 
-        upload_items_to_firestore(u'pets', pets)
+        petwise_serv.inser_many(u'pets', pets)
 
     def update_config_file(self):
         with open("./crawler/config.json", "w") as f:

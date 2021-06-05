@@ -3,6 +3,7 @@ from typing import Dict, List, Union
 import yaml
 from ebaysdk.finding import Connection
 import utils
+from db_serv import petwise_serv
 
 ITEMS = 50
 PAGES = 10
@@ -109,7 +110,7 @@ def search_by_keywords(items_per_page: int = ITEMS, num_pages: int = PAGES):
     api = Connection(config_file='ebay.yaml', siteid='EBAY-US')
     keywords = get_all_keywords()
     for keyword in keywords:
-        for page_number in range(1, num_pages+1):
+        for page_number in range(1, num_pages + 1):
             search_page_of_items(api, keyword, items_per_page, page_number)
 
 
@@ -126,14 +127,22 @@ def search_page_of_items(
     """
     request = generate_request(keyword, items_per_page, page_number)
     response = api.execute('findItemsByKeywords', request)
-    new_items = response.dict()["searchResult"]["item"]
-    new_items = {
-        item["itemId"]: translate_response(filter_item(item, keyword.split(' ')))
+    results = response.dict()["searchResult"]["item"]
+    results = {
+        item["itemId"]: translate_response(
+            filter_item(item, keyword.split(' ')))
         for
         item in
-        new_items
+        results
     }
-    utils.upload_items_to_firestore("products", new_items)
+    new_items = {}
+    for item in results:
+        new_item = translate_response(filter_item(item, keyword.split(' ')))
+        new_item['_id'] = item['itemId']
+        new_item.pop('itemId')
+        new_items[new_item['_id']] = new_item
+
+    petwise_serv.inser_many("products", new_items)
 
 
 def main():
@@ -142,4 +151,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
