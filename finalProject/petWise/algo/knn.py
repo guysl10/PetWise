@@ -20,7 +20,7 @@ def parse_data_to_model(data):
     model_data = []
     for item in data:
         model_item = {'id': item['id'], 'data': []}
-        if not  'גודל' in item:
+        if 'גודל' not in item:
             item['גודל'] = ''
         model_item['data'].append(SIZES[item['גודל']])
         model_item['data'].append(AREAS[item['אזור']])
