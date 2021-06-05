@@ -1,21 +1,37 @@
 from django.http import HttpResponse
-import firebase_admin
-from firebase_admin import firestore, credentials
-import os
+from firebase_admin import auth
+
+from .firebase_connection import FirebaseConnection
 from singleton_decorator import singleton
 
-CRED = credentials.Certificate(os.path.join(os.path.dirname(__file__), "petwise-547d7-firebase-adminsdk-70638-65e70cc071.json"))
+
+def create_user(user_id, email):
+    return auth.create_user(email=email, uid=user_id) if user_id else auth.create_user(email=email)
+
+
+def update_email(user_id, email):
+    return auth.update_user(user_id, email=email)
+
+
+def update_display_name(user_id, display_name):
+    return auth.update_user(user_id, display_name=display_name)
+
 
 @singleton
 class Views:
     def __init__(self):
-        app = firebase_admin.initialize_app(CRED)
-        self.firestore_client = firestore.client(app)
+        self.firestore_client = FirebaseConnection().firestore_client
 
-    def add_user(self, request):
-        return HttpResponse("Hello, world. You're at the polls index.")
-
-    def get_user(self, request, user_id):
+    def get_user_by_id(self, request, user_id):
         user_data = self.firestore_client.collection(u'users').document(user_id).get()
-        print(user_data)
         return HttpResponse(str(user_data.to_dict()))
+
+    def delete_user(self, request, user_id):
+        # TODO: check if user is connected and delete subdocuments
+        self.firestore_client.collection(u'users').document(user_id).delete()
+        auth.delete_user(user_id)
+        return HttpResponse("true")
+
+    def update_user(self, request, user_id):
+        self.firestore_client.collection(u'users').document(user_id).update(request.body())
+        return HttpResponse("true")
