@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 
-from .views_ import users, articles, adoption, adoption_days, store, association, connection, products
+from .views_ import users, articles, adoption, adoption_days, store, association, connection, products, use_analytics
 
 
 def index(request):
@@ -117,3 +117,7 @@ def delete_product(request, document_id):
 @api_view(['POST'])
 def edit_product(request, document_id, data):
     return products.Views().update_product(request, document_id, data)
+
+@api_view(['POST'])
+def add_use_analytics(request, data):
+    return use_analytics.Views().add_use_analytics(request, data)
