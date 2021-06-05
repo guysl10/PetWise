@@ -15,7 +15,7 @@ class Views:
     def get_adoption(self, request, pet_kind):
         adoptions = [doc.get().to_dict() for doc in self.firestore_client.collection(u'adoption').list_documents() if
                      str(doc.get().to_dict().get('kind')) == pet_kind]
-        return HttpResponse(str(adoptions))
+        return HttpResponse('{'+str(adoptions)+'}')
 
     def delete_adoption(self, request, document_id):
         self.firestore_client.collection(u'adoption').document(document_id).delete()
