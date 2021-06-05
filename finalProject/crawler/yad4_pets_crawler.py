@@ -1,11 +1,11 @@
 import json
 import uuid
+from datetime import date
 from typing import Dict, List, Union
 from bs4 import BeautifulSoup
 from loguru import logger
 
-from crawler.utils import _safe_get_requests, log_wrapper, log_configure, \
-    upload_logs
+from crawler.utils import _safe_get_requests, log_wrapper, log_configure
 from db_serv import petwise_serv
 
 
@@ -186,6 +186,15 @@ class Yad4PetsCrawler:
             "w"
         ) as f:
             json.dump(self.urls, f)
+
+
+def upload_logs():
+    """Upload log file to firebase."""
+    with open("petwise.log", "r") as f:
+        log_data = f.readlines()
+    petwise_serv.insert_many(
+        "yad4_logs", {date.today().strftime("%d/%m/%Y"): log_data}
+    )
 
 
 @logger.catch

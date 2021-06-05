@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 import re
 import traceback
-from datetime import date
-from typing import Callable, Union, Dict
+from typing import Callable, Union
 import requests
 from bs4 import BeautifulSoup
 from loguru import logger
-import db_serv
 
 # base URL
 MORFIX = 'https://www.morfix.co.il/'
@@ -42,15 +40,6 @@ def log_wrapper(function: Callable):
 def log_configure():
     """Set configuration to loguru."""
     logger.add("petwise.log", retention="10 days")
-
-
-def upload_logs():
-    """Upload log file to firebase."""
-    with open("petwise.log", "r") as f:
-        log_data = f.readlines()
-    db_serv.petwise_serv.insert_many(
-        "yad4_logs", {date.today().strftime("%d/%m/%Y"): log_data}
-    )
 
 
 def translate(text: str) -> str:

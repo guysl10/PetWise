@@ -7,6 +7,8 @@ from db_serv import petwise_serv
 
 ITEMS = 1
 PAGES = 1
+KEYWORD_TYPE = {'size': 'גודל', 'kind': 'סוג', 'product': 'מוצר'}
+KEYWORDS = {}
 
 
 def generate_request(
@@ -66,10 +68,16 @@ def get_all_keywords() -> List[str]:
     :return: All permutations of keywords.
     """
     with open('product_keywords.yaml') as f:
-        keywords = yaml.full_load(f)
+        KEYWORDS = yaml.full_load(f)
 
-    types = [keywords[t] for t in keywords]
+    types = [KEYWORDS[t] for t in KEYWORDS]
     return [" ".join(t) for t in itertools.product(*types)]
+
+
+def get_translated_key(key_type: str, key: str) -> str:
+    with open('product_keywords.yaml') as f:
+        KEYWORDS = yaml.full_load(f)
+    return KEYWORDS[key_type][key][0]
 
 
 def filter_item(
@@ -94,9 +102,14 @@ def filter_item(
                 filtered_item[converted_keys[key]] = filter_item(
                     item[key], keywords
                 )
+    translated_keywords = {}
+    for i, key in enumerate(keywords):
+        translated_keywords[KEYWORD_TYPE[list(KEYWORD_TYPE.keys())[i]]] = \
+            get_translated_key(
+            list(KEYWORD_TYPE.keys())[i], key
+        )
 
-    # filtered_item['price'] = item['shippingServiceCost']['value']
-    filtered_item['labels'] = keywords
+    filtered_item['labels'] = translated_keywords
     return filtered_item
 
 

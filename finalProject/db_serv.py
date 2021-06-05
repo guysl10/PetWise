@@ -1,4 +1,3 @@
-import uuid
 from typing import Dict
 
 import pymongo
@@ -6,8 +5,9 @@ from loguru import logger
 from firebase_admin import firestore, initialize_app, credentials
 
 from utils import log_wrapper
-
-CRED_PATH = r"petwise-547d7-4bb8fbabc376.json"
+CRED_PATH = "/home/guy/PycharmProjects/PetWise/finalProject/petwise-547d7" \
+   "-4bb8fbabc376.json"
+# CRED_PATH = r"petwise-547d7-4bb8fbabc376.json"
 
 
 class Singleton(type):
@@ -47,7 +47,10 @@ class FireBasePetWiseServ(metaclass=Singleton):
             collection_name)
         for item_id in items:
             logger.info(f"uploading to firestore {item_id}")
-            items_db.document(item_id).set(items[item_id])
+            if isinstance(items[item_id], Dict):
+                items_db.document(str(item_id)).set(items[item_id])
+            else:
+                items_db.document(str(item_id)).set({item_id: items[item_id]})
 
 
 class MongoPetwiseServ(metaclass=Singleton):
@@ -74,7 +77,7 @@ class MongoPetwiseServ(metaclass=Singleton):
 
 
 # Working with Firebase:
-# petwise_serv = FireBasePetWiseServ()
+petwise_serv = FireBasePetWiseServ()
 
 # Working with MongoDB:
-petwise_serv = MongoPetwiseServ()
+# petwise_serv = MongoPetwiseServ()
