@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function petGalleryItem({ description, date }) {
+export default function PetGalleryItem({ description, link, title }) {
 
     return (
         <div className="col-md-4 ">
