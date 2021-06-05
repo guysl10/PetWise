@@ -19,4 +19,6 @@ urlpatterns = [
     path('users/edit/<str:user_id>', views.edit_user, name='edit_user'),
     path('login', views.log_in, name='log_in'),
     path('logout', views.log_out, name='log_out'),
+    path('products/<str:label>', views.get_products, name='get_products'),
+    path('products/delete/<str:document_id>', views.delete_product, name='delete_productls'),
 ]
