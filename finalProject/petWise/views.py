@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 
-from .views_ import users, articles, adoption, adoption_days, store, association, connection
+from .views_ import users, articles, adoption, adoption_days, store, association, connection, products
 
 
 def index(request):
@@ -28,8 +28,9 @@ def get_user(request, user_id):
 def get_articles(request, search='אימוץ חיות'):
     return articles.Views().get_articles(request, search)
 
+
 @api_view(['GET'])
-def get_adoption(request, pet_kind):
+def get_adoption(request, pet_kind='כלב'):
     return adoption.Views().get_adoption(request, pet_kind)
 
 
@@ -101,3 +102,18 @@ def log_in(request):
 @api_view(['GET'])
 def log_out(request):
     return connection.log_out(request)
+
+
+@api_view(['GET'])
+def get_products(request, label='dog'):
+    return products.Views().get_product(request, label)
+
+
+@api_view(['DELETE'])
+def delete_product(request, document_id):
+    return products.Views().delete_product(request, document_id)
+
+
+@api_view(['POST'])
+def edit_product(request, document_id, data):
+    return products.Views().update_product(request, document_id, data)
