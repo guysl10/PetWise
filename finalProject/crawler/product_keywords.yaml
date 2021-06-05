@@ -1,0 +1,35 @@
+size:
+  small:
+    - קטן
+  big:
+    - גדול
+  young:
+    - צעיר
+  old:
+    - זקן
+  fat:
+    - שמן
+  diet:
+    - רזה
+kind:
+  pet:
+    - חית מחמד
+  dog:
+    - כלב
+  cat:
+    - חתול
+product:
+  food:
+    - אוכל
+  bowl:
+    - קערה
+  game:
+    - משחק
+  cloth:
+    - בגד
+  strap:
+    - רצוע
+  sweater:
+    - סוודר
+  coat:
+    - מעיל
