@@ -56,7 +56,7 @@ export default function Pets() {
           </div>
         </section>
         <section className="ftco-section">
-          <Search placeholder="input search text"  onSearch={onSearch} style={{ width: 200 }} />
+          <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200 }} />
 
           <div className="container">
             <div className="row">
