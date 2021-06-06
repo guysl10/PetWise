@@ -16,28 +16,29 @@ class Header extends Component {
                                     <a href="/login" className="btn btn-primary "> התחבר</a>
                                 </p>
                             </div>
+
                             <div className="col-md-6 d-flex justify-content-md-end">
-                                <div className="social-media">
-                                    <p className="mb-0 d-flex">
-                                        <a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-facebook"><i className="sr-only">Facebook</i></span></a>
-                                        <a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-twitter"><i className="sr-only">Twitter</i></span></a>
-                                        <a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-instagram"><i className="sr-only">Instagram</i></span></a>
-                                    </p>
-                                </div>
+                                <form>
+                                    <input type="text" className="main-search-header" placeholder="חיפוש " />
+                                </form>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
                 <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
                     <div className="container">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="fa fa-bars" /> Menu
                 </button>
-                    <div className="collapse navbar-collapse" id="ftco-nav">
+                        <div className="collapse navbar-collapse" id="ftco-nav">
                             <ul className="navbar-nav ml-auto">
-                                <li className="nav-item"><a href="/contact" className="nav-link">צור קשר</a></li>
-                                <li className="nav-item"><a href="/articles" className="nav-link">מאמרים</a></li>
-                                <li className="nav-item"><a href="/adoptionsGallery" className="nav-link">אימוץ</a></li>
+                                {/* <li className="nav-item"><a href="/contact" className="nav-link">צור קשר</a></li> */}
+                                {/* <li className="nav-item"><a href="/associations" className="nav-link">ארגונים</a></li> */}
+                                <li className="nav-item"><a href="/articles" className="nav-link">כתבות</a></li>
+                                <li className="nav-item"><a href="/pets" className="nav-link">חיות</a></li>
+                                <li className="nav-item"><a href="/adoptionsGallery" className="nav-link">ימי אימוץ</a></li>
                                 <li className="nav-item"><a href="/about" className="nav-link">אודות</a></li>
                                 <li className="nav-item"><a href="/profile" className="nav-link">פרופיל</a></li>
                                 <li className="nav-item active"><a href="/" className="nav-link">בית</a></li>

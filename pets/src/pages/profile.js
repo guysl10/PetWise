@@ -11,7 +11,7 @@ class profile extends Component {
                         <div className="overlay" />
                         <div className="container">
                             <div className="row no-gutters slider-text align-items-end">
-                                <div className="col-md-9 pb-5" style={{textAlign: "right", margin: "0 auto" }}>
+                                <div className="col-md-9 pb-5" style={{ textAlign: "right", margin: "0 auto" }}>
                                     <p className="breadcrumbs mb-2">
                                         <span>פרופיל  <i className="ion-ios-arrow-forward" /></span>
                                         <span className="mr-2"><a href="/">בית <i className="ion-ios-arrow-forward" /></a></span>
@@ -23,10 +23,26 @@ class profile extends Component {
                     </section>
 
                     <section className="ftco-section" style={{ padding: "4em 0em" }}>
-                        <div className="media-body" style={{ margin: "0em 25em" }}>
-                            {/* <h3 className="heading" style={{ textAlign: "center" }}>Hello User!</h3> */}
-                            <img src="../assets/images/staff-5.jpg" className="rounded" style={{ height: "245px", position: "relative", right: "-44%", border: "2px solid #4ccbba" }} />
-                            <i class="fas fa-user-edit"></i>
+                        <div className="media-body user-area" style={{ margin: "0em 25em" }}>
+                            <div>
+                                <div class="card-body py-3 px-0">
+                                    <p className="mb-0 phone pl-md-2" style={{ textAlign: "right", width: "61%" }}>
+                                        <a href="/editProfile" className="mr-2">עריכת פרופיל</a>
+                                        <span> | </span>
+                                        <a className="btn"> !שלום ישראל </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="user-img">
+                                <img src="../assets/images/staff-5.jpg" className="rounded" style={{ height: "245px", position: "relative", right: "-44%", border: "2px solid #4ccbba" }} />
+                            </div>
+                            <div className="user-details">
+                                <span>ישראל ישראלי</span>
+                                <br />
+                                <span>israel@gmail.com</span>
+                                <br />
+                                <span>12345678</span>
+                            </div>
                         </div>
                     </section>
 
@@ -82,7 +98,7 @@ class profile extends Component {
 
                             <div className="" style={{ flex: "6" }}>
                                 <div className="row">
-                                    <h3 className="heading">מאמרים</h3>
+                                    <h3 className="heading">כתבות</h3>
                                 </div>
                                 <br />
                                 <div className="row d-flex" >
@@ -144,26 +160,9 @@ class profile extends Component {
                                     </div>
 
                                 </div>
-
-                                <div className="row">
-                                    <div className="col text-center">
-                                        <div className="block-27">
-                                            <ul>
-                                                <li><a href="#">&lt;</a></li>
-                                                <li className="active"><span>1</span></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
-                                                <li><a href="#">&gt;</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-                     
 
+                            {/* 
                             <div className="space" style={{ flex: "2", marginRight: "10%", borderRight: "1px solid #00000024" }}></div>
 
                             <div className="" style={{ flex: "6" }}>
@@ -258,29 +257,13 @@ class profile extends Component {
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col text-center">
-                                        <div className="block-27">
-                                            <ul>
-                                                <li><a href="#">&lt;</a></li>
-                                                <li className="active"><span>1</span></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
-                                                <li><a href="#">&gt;</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-                     
-                     
+ */}
+
                         </div>
                     </section>
 
-                    
+
                 </div>
             </>
         )

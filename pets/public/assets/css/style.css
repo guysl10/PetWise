@@ -9553,6 +9553,45 @@ textarea.form-control {
 .contactForm textarea.form-control {
   height: inherit !important; }
 
+  .user-area{
+    margin: 0em 25em;
+    position: relative;
+    width: 100%;
+  }
+
+.user-img {
+  /* position: absolute; */
+  width: 30%;
+}
+
+.user-details{
+  position: absolute;
+  width: 40%;
+  top:50%;
+  right: 12%;
+}
+
+.user-details-edit{
+    width: 55%;
+    padding: 2% 0%;
+}
+
+.main-search-header{
+  text-align: right;
+  border: none;
+  background-color: transparent;
+  padding: 1.7% 0%;
+  border-bottom: 1px solid white;
+}
+.main-search-header::placeholder {
+  color: white;
+}
+
+.main-search-header:focus{
+  outline: none;
+  color: white;
+}
+
 #map {
   height: 500px;
   width: 100%; }

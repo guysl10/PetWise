@@ -24,20 +24,17 @@ class Footer extends Component {
                                 <li><a href="/" className="py-2 d-block">בית</a></li>
                                 <li><a href="/profile" className="py-2 d-block">פרופיל</a></li>
                                 <li><a href="/about" className="py-2 d-block">אודות</a></li>
-                                <li><a href="/adoptionsGallery" className="py-2 d-block">אימוץ</a></li>
-                                <li><a href="/articles" className="py-2 d-block">מאמרים</a></li>
-                                <li><a href="/contact" className="py-2 d-block">צור קשר</a></li>
+                                <li><a href="/pets" className="py-2 d-block">חיות</a></li>
+                                <li><a href="/adoptionsGallery" className="py-2 d-block">ימי אימוץ</a></li>
+                                <li><a href="/articles" className="py-2 d-block">כתבות</a></li>
+                                {/* <li><a href="/associations" className="py-2 d-block">ארגונים</a></li> */}
+                                {/* <li><a href="/contact" className="py-2 d-block">צור קשר</a></li> */}
                             </ul>
                         </div>
 
                         <div className="col-md-6 col-lg-3 mb-4 mb-md-0">
                             <h2 className="footer-heading">עלינו</h2>
                             <p>עוזרים לאוהבי החיות למצוא את כל המידע הדרוש במקום אחד</p>
-                            <ul className="ftco-footer-social p-0">
-                                <li className="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span className="fa fa-twitter" /></a></li>
-                                <li className="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span className="fa fa-facebook" /></a></li>
-                                <li className="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span className="fa fa-instagram" /></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
