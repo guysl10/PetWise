@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from .firebase_connection import FirebaseConnection
 from singleton_decorator import singleton
-
+import json
 
 @singleton
 class Views:
@@ -15,7 +15,8 @@ class Views:
     def get_association(self, request):
         associations = [doc.get().to_dict() for doc in
                         self.firestore_client.collection(u'association').list_documents()]
-        return HttpResponse(str(associations))
+        association = {'data': associations}
+        return HttpResponse(json.dumps(association))
 
     def delete_association(self, request, document_id):
         self.firestore_client.collection(u'association').document(document_id).delete()
