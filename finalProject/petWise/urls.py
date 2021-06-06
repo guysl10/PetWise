@@ -26,4 +26,8 @@ urlpatterns = [
     path('summary/users', views.get_users_count, name='get_users_count'),
     path('summary/pets', views.get_pets_count, name='get_pets_count'),
     path('summary/products', views.get_products_count, name='get_products_count'),
+    path('register', views.register_user, name='register_user'),
+    path('delete_user', views.delete_user, name='delete_user'),
+    path('update_email', views.update_email, name='update_email'),
+    path('forgot_password', views.update_password, name='update_password'),
 ]
