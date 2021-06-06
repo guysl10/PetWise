@@ -8,7 +8,7 @@ class Views:
     def __init__(self):
         self.firestore_client = FirebaseConnection().firestore_client
 
-    def get_adoption_by_id(self, document_id):
+    def get_adoption_by_id(self, request, document_id):
         adoption = self.firestore_client.collection(u'pets').document(document_id).get()
         return HttpResponse(adoption)
 

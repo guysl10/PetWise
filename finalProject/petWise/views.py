@@ -33,6 +33,10 @@ def get_articles(request, search='אימוץ חיות'):
 def get_adoption(request, pet_kind='כלב'):
     return adoption.Views().get_adoption(request, pet_kind)
 
+@api_view(['GET'])
+def get_adoption_by_id(request, document_id):
+    return adoption.Views().get_adoption_by_id(request, document_id)
+
 
 @api_view(['DELETE'])
 def delete_adoption(request, document_id):
@@ -49,6 +53,11 @@ def get_association(request):
     return association.Views().get_association(request)
 
 
+@api_view(['GET'])
+def get_association_by_id(request, document_id):
+    return association.Views().get_association_by_id(request, document_id)
+
+
 @api_view(['DELETE'])
 def delete_association(request, document_id):
     return association.Views().delete_adoption(request, document_id)
@@ -62,6 +71,11 @@ def edit_association(request, document_id, data):
 @api_view(['GET'])
 def get_adoption_days(request):
     return adoption_days.Views().get_adoption_days(request)
+
+
+@api_view(['GET'])
+def get_adoption_day_by_id(request, document_id):
+    return adoption_days.Views().get_adoption_day_by_id(request, document_id)
 
 
 @api_view(['DELETE'])
