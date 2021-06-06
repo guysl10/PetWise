@@ -19,7 +19,7 @@ def euclidean_distance(row1, row2):
 def parse_data_to_model(data):
     model_data = []
     for item in data:
-        model_item = {'id': item['id'], 'data': []}
+        model_item = {'id': item['מספר מודעה'], 'data': []}
         if 'גודל' not in item:
             item['גודל'] = ''
         model_item['data'].append(SIZES[item['גודל']])
