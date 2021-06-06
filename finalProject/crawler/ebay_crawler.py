@@ -5,7 +5,7 @@ from ebaysdk.finding import Connection
 import utils
 from db_serv import petwise_serv
 
-ITEMS = 1
+ITEMS = 7
 PAGES = 1
 KEYWORD_TYPE = {'size': 'גודל', 'kind': 'סוג', 'product': 'מוצר'}
 KEYWORDS = {}
