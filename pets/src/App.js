@@ -17,6 +17,9 @@ import editProfile from './pages/editProfile';
 import Search from './components/Search';
 import Pets from './pages/pets';
 import AdminUsers from './components/AdminUsers';
+import Categories from './pages/categories';
+import fullPetPost from './pages/fullPetPost';
+import Products from './pages/products';
 
 function App() {
   return (
@@ -38,8 +41,12 @@ function App() {
           <Route exact path="/about" component={about} />
           <Route exact path="/pets" component={Pets} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/categories" component={Categories} />
           {/* <Route exact path="/associations" component={Associations} /> */}
           <Route exact path="/editProfile" component={editProfile} />
+          <Route path="/adoption/:id" exact component={fullPetPost} />
+          <Route path="/products" component={Products} />
+          products
           
         </Switch>
       </Router>

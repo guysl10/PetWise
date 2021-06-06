@@ -31,8 +31,9 @@ def get_articles(request, search='אימוץ חיות'):
 
 
 @api_view(['GET'])
-def get_adoption(request, pet_kind='כלב'):
-    return adoption.Views().get_adoption(request, pet_kind)
+
+def get_adoption(request):
+    return adoption.Views().get_adoption(request)
 
 
 @api_view(['GET'])

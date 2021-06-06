@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import Pet from './pet';
 import ScriptTag from 'react-script-tag';
+
+import Recommendations from '../components/Recommendations';
+
 import { Input, Space } from 'antd';
 const { Search } = Input;
+
 
 export default function Pets() {
 
@@ -11,7 +15,7 @@ export default function Pets() {
 
 
   React.useEffect(() => {
-    fetch('http://localhost:8000/petWise/adoptions')
+    fetch('http://localhost:8000/petWise/adoption')
       .then(response => response.json())
       .then(
         data => {
@@ -20,7 +24,7 @@ export default function Pets() {
         }
       )
   }, [])
-//   .then(response => response.json())
+//     .then(response => response.json())
 //     .then(response => {
 //         console.log(response)
 //     })
@@ -55,30 +59,19 @@ export default function Pets() {
             </div>
           </div>
         </section>
+
+<Recommendations />
+        
         <section className="ftco-section">
           <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200 }} />
 
           <div className="container">
             <div className="row">
               {pets.map((data, key) => {
-                return <Pet key={key} description={data.description} link={data.link} title={data.title} />
+                return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
               })}
             </div>
-            <div className="row mt-5">
-              <div className="col text-center">
-                <div className="block-27">
-                  <ul>
-                    <li><a href="#">&lt;</a></li>
-                    <li className="active"><span>1</span></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+
           </div>
         </section>
         <ScriptTag type="text/javascript" src="../assets/js/pets.js" />
