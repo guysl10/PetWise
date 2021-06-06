@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from .firebase_connection import FirebaseConnection
 from singleton_decorator import singleton
 from GoogleNews import GoogleNews
+import json
 
 @singleton
 class Views:
@@ -11,4 +12,12 @@ class Views:
         articles = []
         for i in range(2):
             articles.extend(googlenews.page_at(i))
-        return HttpResponse(articles)
+
+        formatted_articles = []
+        for article in articles:
+            news = article
+            news['datetime'] = str(news['datetime'])
+            formatted_articles.append(news)
+
+        data = {'data': formatted_articles}
+        return HttpResponse(json.dumps(data))

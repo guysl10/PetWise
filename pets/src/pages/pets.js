@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import PetGalleryItem from './petGalleryItem';
+import Pet from './pet';
+import ScriptTag from 'react-script-tag';
 
-
-export default function AdoptionsGallery() {
+export default function Pets() {
 
   const [pets, setPets] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('http://localhost:8000/petWise/adoption_days')
+    fetch('http://localhost:8000/petWise/adoptions')
       .then(response => response.json())
       .then(
         data => {
@@ -29,8 +29,8 @@ export default function AdoptionsGallery() {
           <div className="container">
             <div className="row no-gutters slider-text align-items-end">
               <div className="col-md-9 pb-5" style={{textAlign: "right", margin: "0px auto"}}>
-                <p className="breadcrumbs mb-2"><span className="mr-2"><a href="/">בית <i className="ion-ios-arrow-forward" /></a></span> <span>ימי אימוץ <i className="ion-ios-arrow-forward" /></span></p>
-                <h1 className="mb-0 bread">ימי אימוץ</h1>
+                <p className="breadcrumbs mb-2"><span className="mr-2"><a href="/">בית <i className="ion-ios-arrow-forward" /></a></span> <span>חיות <i className="ion-ios-arrow-forward" /></span></p>
+                <h1 className="mb-0 bread">חיות</h1>
               </div>
             </div>
           </div>
@@ -39,10 +39,10 @@ export default function AdoptionsGallery() {
           <div className="container">
             <div className="row">
               {pets.map((data, key) => {
-                return <PetGalleryItem key={key} description={data.description} link={data.link} title={data.title} />
+                return <Pet key={key} description={data.description} link={data.link} title={data.title} />
               })}
             </div>
-            {/* <div className="row mt-5">
+            <div className="row mt-5">
               <div className="col text-center">
                 <div className="block-27">
                   <ul>
@@ -56,11 +56,10 @@ export default function AdoptionsGallery() {
                   </ul>
                 </div>
               </div>
-            </div> */}
-        
+            </div>
           </div>
         </section>
-       
+        <ScriptTag type="text/javascript" src="../assets/js/pets.js" />
       </div>
     </>
   );

@@ -9,9 +9,14 @@ import Header from './components/Header';
 import about from './pages/about';
 import adoptionsGallery from './pages/adoptionsGallery';
 import articles from './pages/articles';
+import Associations from './pages/association';
 import home from './pages/home';
 import login from './pages/login';
 import profile from './pages/profile';
+import editProfile from './pages/editProfile';
+import Search from './components/Search';
+import Pets from './pages/pets';
+import AdminUsers from './components/AdminUsers';
 
 function App() {
   return (
@@ -27,9 +32,15 @@ function App() {
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/adminPets" component={AdminPets} />
           <Route exact path="/adminViewPet" component={AdminViewPet} />
+          <Route exact path="/adminUsers" component={AdminUsers} />
           <Route exact path="/articles" component={articles} />
           <Route exact path="/adoptionsGallery" component={adoptionsGallery} />
           <Route exact path="/about" component={about} />
+          <Route exact path="/pets" component={Pets} />
+          <Route exact path="/search" component={Search} />
+          {/* <Route exact path="/associations" component={Associations} /> */}
+          <Route exact path="/editProfile" component={editProfile} />
+          
         </Switch>
       </Router>
 
