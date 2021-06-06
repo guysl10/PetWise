@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 
-from .views_ import users, articles, adoption, adoption_days, store, association, connection, products, use_analytics
+from .views_ import users, articles, adoption, adoption_days, store, \
+    association, connection, products, use_analytics, summary
 
 
 def index(request):
@@ -71,7 +72,8 @@ def delete_adoption_day(request, document_id):
 
 @api_view(['POST'])
 def edit_adoption_day(request, document_id, data):
-    return adoption_days.Views().update_adoption_days(request, document_id, data)
+    return adoption_days.Views().update_adoption_days(request, document_id,
+                                                      data)
 
 
 @api_view(['GET'])
@@ -118,6 +120,22 @@ def delete_product(request, document_id):
 def edit_product(request, document_id, data):
     return products.Views().update_product(request, document_id, data)
 
+
 @api_view(['POST'])
 def add_use_analytics(request, data):
     return use_analytics.Views().add_use_analytics(request, data)
+
+
+@api_view(['GET'])
+def get_users_count(request):
+    return summary.Views().get_users_count(request)
+
+
+@api_view(['GET'])
+def get_pets_count(request):
+    return summary.Views().get_pets_count(request)
+
+
+@api_view(['GET'])
+def get_products_count(request):
+    return summary.Views().get_products_count(request)

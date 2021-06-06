@@ -1,19 +1,13 @@
 size:
   small:
     - קטן
+  middle:
+    - בינוני
   big:
     - גדול
-  young:
-    - צעיר
-  old:
-    - זקן
-  fat:
-    - שמן
-  diet:
-    - רזה
+  giant:
+    - ענק
 kind:
-  pet:
-    - חית מחמד
   dog:
     - כלב
   cat:
