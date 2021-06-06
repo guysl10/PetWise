@@ -34,6 +34,7 @@ def get_articles(request, search='אימוץ חיות'):
 def get_adoption(request, pet_kind='כלב'):
     return adoption.Views().get_adoption(request, pet_kind)
 
+
 @api_view(['GET'])
 def get_adoption_by_id(request, document_id):
     return adoption.Views().get_adoption_by_id(request, document_id)
@@ -105,19 +106,34 @@ def edit_store(request, document_id, data):
     return store.Views().update_store(request, document_id, data)
 
 
+@api_view(['PUT'])
+def update_email(request, email):
+    return users.Views().update_email(request, email)
+
+
+@api_view(['PUT'])
+def update_password(request, email):
+    return users.Views().update_password(request, email)
+
+
 @api_view(['DELETE'])
-def delete_user(request, user_id):
-    return users.Views().delete_user(request, user_id)
+def delete_user(request, email):
+    return users.Views().delete_user(request, email)
 
 
 @api_view(['POST'])
-def log_in(request):
-    return connection.log_in(request)
+def register_user(request, email, password):
+    return users.Views().register_user(email, password)
+
+
+@api_view(['POST'])
+def log_in(request, email, password):
+    return connection.Views().log_in(email, password)
 
 
 @api_view(['GET'])
 def log_out(request):
-    return connection.log_out(request)
+    return connection.Views().log_out()
 
 
 @api_view(['GET'])
