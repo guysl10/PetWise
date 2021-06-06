@@ -23,12 +23,10 @@ class Footer extends Component {
                             <ul className="list-unstyled">
                                 <li><a href="/" className="py-2 d-block">בית</a></li>
                                 <li><a href="/profile" className="py-2 d-block">פרופיל</a></li>
-                                <li><a href="/about" className="py-2 d-block">אודות</a></li>
+                                <li><a href="/products" className="py-2 d-block">מוצרים</a></li>
                                 <li><a href="/pets" className="py-2 d-block">חיות</a></li>
                                 <li><a href="/adoptionsGallery" className="py-2 d-block">ימי אימוץ</a></li>
                                 <li><a href="/articles" className="py-2 d-block">כתבות</a></li>
-                                {/* <li><a href="/associations" className="py-2 d-block">ארגונים</a></li> */}
-                                {/* <li><a href="/contact" className="py-2 d-block">צור קשר</a></li> */}
                             </ul>
                         </div>
 

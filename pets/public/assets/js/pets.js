@@ -1,4 +1,4 @@
-<script src="timeme.min.js"></script>
+{/* <script src="timeme.min.js"></script>
 // Initialize library and start tracking time
 TimeMe.initialize({
     currentPageName: "my-home-page", // current page
@@ -8,4 +8,4 @@ TimeMe.initialize({
 // ... Some time later ...
 
 // Retrieve time spent on current page
-let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds(); */}

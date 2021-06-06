@@ -29,9 +29,8 @@ def get_articles(request, search='אימוץ חיות'):
     return articles.Views().get_articles(request, search)
 
 @api_view(['GET'])
-def get_adoption(request, pet_kind):
-    return adoption.Views().get_adoption(request, pet_kind)
-
+def get_adoption(request):
+    return adoption.Views().get_adoption(request)
 
 @api_view(['DELETE'])
 def delete_adoption(request, document_id):

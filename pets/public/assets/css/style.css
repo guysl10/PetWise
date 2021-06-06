@@ -9592,6 +9592,10 @@ textarea.form-control {
   color: white;
 }
 
+.recomd-box{
+  margin: 1% 4%;
+}
+
 #map {
   height: 500px;
   width: 100%; }

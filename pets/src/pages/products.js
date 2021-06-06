@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Pet from './pet';
+import Product from './product';
 import ScriptTag from 'react-script-tag';
-import Recommendations from '../components/Recommendations';
 
-export default function Pets() {
+export default function Products() {
 
   const [pets, setPets] = React.useState([]);
 
@@ -16,11 +15,6 @@ export default function Pets() {
         }
       )
   }, [])
-//     .then(response => response.json())
-//     .then(response => {
-//         console.log(response)
-//     })
-// }, [])
 
   return (
     <>
@@ -30,20 +24,18 @@ export default function Pets() {
           <div className="container">
             <div className="row no-gutters slider-text align-items-end">
               <div className="col-md-9 pb-5" style={{textAlign: "right", margin: "0px auto"}}>
-                <p className="breadcrumbs mb-2"><span className="mr-2"><a href="/">בית <i className="ion-ios-arrow-forward" /></a></span> <span>חיות <i className="ion-ios-arrow-forward" /></span></p>
-                <h1 className="mb-0 bread">חיות</h1>
+                <p className="breadcrumbs mb-2"><span className="mr-2"><a href="/">בית <i className="ion-ios-arrow-forward" /></a></span> <span>מוצרים <i className="ion-ios-arrow-forward" /></span></p>
+                <h1 className="mb-0 bread">מוצרים</h1>
               </div>
             </div>
           </div>
         </section>
-
-<Recommendations />
         
         <section className="ftco-section">
           <div className="container">
             <div className="row">
               {pets.map((data, key) => {
-                return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
+                return <Product key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
               })}
             </div>
 
