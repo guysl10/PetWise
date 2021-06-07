@@ -5,10 +5,10 @@ import pyrebase
 from loguru import logger
 from firebase_admin import firestore, initialize_app, credentials
 
-from utils import log_wrapper
-CRED_PATH = "/home/guy/PycharmProjects/PetWise/finalProject/petwise-547d7" \
-   "-4bb8fbabc376.json"
-# CRED_PATH = r"petwise-547d7-4bb8fbabc376.json"
+from crawler.utils import log_wrapper
+#CRED_PATH = "/home/guy/PycharmProjects/PetWise/finalProject/petwise-547d7" \
+   #"-4bb8fbabc376.json"
+CRED_PATH = r"petwise-547d7-4bb8fbabc376.json"
 
 
 FIRE_BASE_CONFIG = {
