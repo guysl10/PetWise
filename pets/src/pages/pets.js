@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import Pet from './pet';
 import ScriptTag from 'react-script-tag';
+
 import Recommendations from '../components/Recommendations';
+
+import { Input, Space } from 'antd';
+const { Search } = Input;
+
 
 export default function Pets() {
 
   const [pets, setPets] = React.useState([]);
+  const [fetchdPets, setfetchdPets] = React.useState([]);
+
 
   React.useEffect(() => {
     fetch('http://localhost:8000/petWise/adoption')
@@ -13,6 +20,7 @@ export default function Pets() {
       .then(
         data => {
           setPets(data.data)
+          setfetchdPets(data.data)
         }
       )
   }, [])
@@ -21,6 +29,21 @@ export default function Pets() {
 //         console.log(response)
 //     })
 // }, [])
+
+  const onSearch = value => {
+    if (value == '') {
+      setPets(fetchdPets)
+    } else {
+      setPets(fetchdPets.filter((data, key) => {
+        if (data.description.search(value) != -1) {
+          const d = {}
+          d[key] = data
+          return d
+        }
+
+      }))
+    }
+  };
 
   return (
     <>
@@ -40,6 +63,8 @@ export default function Pets() {
 <Recommendations />
         
         <section className="ftco-section">
+          <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200 }} />
+
           <div className="container">
             <div className="row">
               {pets.map((data, key) => {

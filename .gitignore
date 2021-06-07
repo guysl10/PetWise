@@ -128,5 +128,13 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+
+# pycharm settings folder
+.idea/
+# keys:
+/finalProject/petwise-547d7-4bb8fbabc376.json
+/finalProject/crawler/ebay_api_key.txt
+/finalProject/crawler/petfinder_api_key.json
 petwise-547d7-firebase-adminsdk-70638-65e70cc071.json
 .idea
+

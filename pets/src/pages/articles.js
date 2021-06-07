@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import Article from "./article";
+import { Input, Space } from 'antd';
+const { Search } = Input;
+
 
 export default function Articles() {
 
   const [articles, setArticles] = React.useState([]);
+  const [fetchdArticles, setFetchedArticles] = React.useState([]);
 
   React.useEffect(() => {
     fetch('http://localhost:8000/petWise/articles')
@@ -11,6 +15,7 @@ export default function Articles() {
       .then(
         data => {
           setArticles(data.data)
+          setFetchedArticles(data.data)
         }
       )
   }, [])
@@ -19,6 +24,20 @@ export default function Articles() {
 //         console.log(response.data[0])
 //     })
 // }, [])
+  const onSearch = value => {
+    if (value == '') {
+      setArticles(fetchdArticles)
+    } else {
+      setArticles(fetchdArticles.filter((data, key) => {
+        if (data.title.search(value) != -1 || data.desc.search(value) != -1) {
+          const d = {}
+          d[key] = data
+          return d
+        }
+
+      }))
+    }
+  };
 
   return (
     <>
@@ -38,9 +57,9 @@ export default function Articles() {
           </div>
         </section>
         <section className="ftco-section bg-light">
+            <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200 }} />
           <div className="container">
             <div className="row d-flex">
-
               {articles.map((data, key) => {
                 return <Article key={key} datetime={data.datetime} desc={data.desc} title={data.title} date={data.date} link={data.link} />
               })}

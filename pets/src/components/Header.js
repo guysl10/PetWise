@@ -17,11 +17,11 @@ class Header extends Component {
                                 </p>
                             </div>
 
-                            <div className="col-md-6 d-flex justify-content-md-end">
-                                <form>
-                                    <input type="text" className="main-search-header" placeholder="חיפוש " />
-                                </form>
-                            </div>
+                            {/*<div className="col-md-6 d-flex justify-content-md-end">*/}
+                            {/*    <form>*/}
+                            {/*        <input type="text" className="main-search-header" placeholder="חיפוש " />*/}
+                            {/*    </form>*/}
+                            {/*</div>*/}
 
 
                         </div>

@@ -12,8 +12,10 @@ class Views:
         adoption = self.firestore_client.collection(u'pets').document(document_id).get()
         return HttpResponse(adoption)
 
+
     def get_adoption(self, request):
         adoptions = [doc.get().to_dict() for doc in self.firestore_client.collection(u'pets').list_documents()]
+
         adoptions = {'data': adoptions}
         return HttpResponse(json.dumps(adoptions))
 
@@ -22,4 +24,6 @@ class Views:
         return HttpResponse(f'Deleted {document_id}')
 
     def update_adoption(self, request, document_id, data):
+
         self.firestore_client.collection(u'pets').document(document_id).set(data)
+

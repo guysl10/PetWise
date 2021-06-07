@@ -1,0 +1,29 @@
+size:
+  small:
+    - קטן
+  middle:
+    - בינוני
+  big:
+    - גדול
+  giant:
+    - ענק
+kind:
+  dog:
+    - כלב
+  cat:
+    - חתול
+product:
+  food:
+    - אוכל
+  bowl:
+    - קערה
+  game:
+    - משחק
+  cloth:
+    - בגד
+  strap:
+    - רצוע
+  sweater:
+    - סוודר
+  coat:
+    - מעיל
