@@ -56,8 +56,11 @@ export default function Articles() {
             </div>
           </div>
         </section>
+        <Search placeholder="חיפוש"  onSearch={onSearch}  style={{ width: 200,
+          marginLeft: "45%",
+          paddingBottom: '0%'}} />
+
         <section className="ftco-section bg-light">
-            <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200 }} />
           <div className="container">
             <div className="row d-flex">
               {articles.map((data, key) => {

@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import Pet from './pet';
 import ScriptTag from 'react-script-tag';
+import { LoadingOutlined } from '@ant-design/icons';
+
+
 
 import Recommendations from '../components/Recommendations';
 
-import { Input, Space } from 'antd';
+import { Input, Space, Carousel, Spin, Pagination} from 'antd';
+
+
+
 const { Search } = Input;
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 
 export default function Pets() {
 
   const [pets, setPets] = React.useState([]);
   const [fetchdPets, setfetchdPets] = React.useState([]);
-
+  const [minValue, setMinValue] = React.useState(0);
+  const [maxValue, setMaxValue] = React.useState(9);
 
   React.useEffect(() => {
     fetch('http://localhost:8000/petWise/adoption')
@@ -45,6 +54,33 @@ export default function Pets() {
     }
   };
 
+  const handleChange = value => {
+    if (value <= 1) {
+      setMinValue(0)
+      setMaxValue(9)
+    } else {
+        setMinValue(maxValue)
+        setMaxValue(value * 9)
+    }
+  };
+
+  const loading = () => {
+    if(pets.length == 0) {
+      return <Spin tip="בטעינה..." indicator={antIcon} style={{
+        position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}/>
+    }
+  };
+
+  const contentStyle = {
+    height: '160px',
+    color: '#fff',
+    lineHeight: '160px',
+    textAlign: 'center',
+    background: '#364d79',
+  };
+
   return (
     <>
       <div>
@@ -61,18 +97,36 @@ export default function Pets() {
         </section>
 
 <Recommendations />
-        
+        <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200,
+          marginLeft: "45%",
+          paddingBottom: '0%'}} />
+
         <section className="ftco-section">
-          <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200 }} />
+
 
           <div className="container">
+
             <div className="row">
-              {pets.map((data, key) => {
+              {
+                loading()
+              }
+              {pets &&
+              pets.length > 0 &&
+              pets.slice(minValue, maxValue).map((data, key) => {
                 return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
               })}
             </div>
 
           </div>
+          {pets &&
+          pets.length > 0 && <Pagination
+              defaultCurrent={1}
+              defaultPageSize={9}
+              onChange={handleChange}
+              total={pets.length}
+              // simple={true}
+              style={{marginLeft: "40%"}}
+          /> }
         </section>
         <ScriptTag type="text/javascript" src="../assets/js/pets.js" />
       </div>
