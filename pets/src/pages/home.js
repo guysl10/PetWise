@@ -39,9 +39,9 @@ class home extends Component {
                                             <span className="flaticon-blind" />
                                         </div>
                                         <div className="media-body">
-                                            <h3 className="heading">Find Friends</h3>
-                                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
-                                            <a href="#" className="btn-custom d-flex align-items-center justify-content-center"><span className="fa fa-chevron-right" /><i className="sr-only">Read more</i></a>
+                                            <h3 className="heading">מצא חבר לחיים</h3>
+                                            <p>אצלנו באתר אנחנו נתאים לך את החבר לחיים שהכי מתאים לך בעזרת האלגוריתמים הכי מתקדמים בשוק</p>
+                                            <a href="http://localhost:3000/pets" className="btn-custom d-flex align-items-center justify-content-center"><span className="fa fa-chevron-right" /><i className="sr-only">Read more</i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -51,9 +51,9 @@ class home extends Component {
                                             <span className="flaticon-dog-eating" />
                                         </div>
                                         <div className="media-body">
-                                            <h3 className="heading">Easy Adoption</h3>
-                                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
-                                            <a href="#" className="btn-custom d-flex align-items-center justify-content-center"><span className="fa fa-chevron-right" /><i className="sr-only">Read more</i></a>
+                                            <h3 className="heading">העשרת הידע</h3>
+                                            <p>אצלנו באתר אנחנו מציגים את הכתבות הכי מעניינות, עדכניות ורלוונטיות שאפשר למצוא ברשת על בהעלי החיים</p>
+                                            <a href="http://localhost:3000/articles" className="btn-custom d-flex align-items-center justify-content-center"><span className="fa fa-chevron-right" /><i className="sr-only">Read more</i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -63,9 +63,9 @@ class home extends Component {
                                             <span className="flaticon-grooming" />
                                         </div>
                                         <div className="media-body">
-                                            <h3 className="heading">Popular Services</h3>
-                                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
-                                            <a href="#" className="btn-custom d-flex align-items-center justify-content-center"><span className="fa fa-chevron-right" /><i className="sr-only">Read more</i></a>
+                                            <h3 className="heading">ימי אימוץ</h3>
+                                            <p>מתעניינים בימי אימוץ? באתר שלנו תוכלו לעבור על כולם ולבחור לאן ללכת</p>
+                                            <a href="http://localhost:3000/adoptionsGallery" className="btn-custom d-flex align-items-center justify-content-center"><span className="fa fa-chevron-right" /><i className="sr-only">Read more</i></a>
                                         </div>
                                     </div>
                                 </div>
