@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Pet from './pet';
 import ScriptTag from 'react-script-tag';
+import { LoadingOutlined } from '@ant-design/icons';
+
 
 import Recommendations from '../components/Recommendations';
 
 import { Input, Space } from 'antd';
+import { Spin } from 'antd';
+
 const { Search } = Input;
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 
 export default function Pets() {
@@ -45,6 +51,15 @@ export default function Pets() {
     }
   };
 
+  const loading = () => {
+    if(pets.length == 0) {
+      return <Spin tip="בטעינה..." indicator={antIcon} style={{
+        position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}/>
+    }
+  };
+
   return (
     <>
       <div>
@@ -61,12 +76,18 @@ export default function Pets() {
         </section>
 
 <Recommendations />
-        
+        <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200,
+          marginLeft: "45%",
+          paddingBottom: '10%'}} />
         <section className="ftco-section">
-          <Search placeholder="חיפוש"  onSearch={onSearch} style={{ width: 200 }} />
+
 
           <div className="container">
+
             <div className="row">
+              {
+                loading()
+              }
               {pets.map((data, key) => {
                 return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
               })}
