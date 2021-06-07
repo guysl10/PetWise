@@ -1,12 +1,12 @@
 from django.http import HttpResponse
-from .firebase_connection import FirebaseConnection
+import db_serv
 from singleton_decorator import singleton
 import json
 
 @singleton
 class Views:
     def __init__(self):
-        self.firestore_client = FirebaseConnection().firestore_client
+        self.firestore_client = db_serv.petwise_serv.firestore_client
 
     def get_product_by_id(self, document_id):
         adoption = self.firestore_client.collection(u'products').document(document_id).get()

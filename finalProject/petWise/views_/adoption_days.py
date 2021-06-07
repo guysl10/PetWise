@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from .firebase_connection import FirebaseConnection
+import db_serv
 from singleton_decorator import singleton
 import json
 
@@ -7,7 +7,7 @@ import json
 @singleton
 class Views:
     def __init__(self):
-        self.firestore_client = FirebaseConnection().firestore_client
+        self.firestore_client = db_serv.petwise_serv.firestore_client
 
     def get_adoption_day_by_id(self, request, document_id):
         adoption_day = self.firestore_client.collection(u'adoption_days').document(document_id).get()

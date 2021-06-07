@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 
-from .views_ import users, articles, adoption, adoption_days, store, \
+from .views_ import articles, adoption, adoption_days, store, \
     association, connection, products, use_analytics, summary
 
 
@@ -11,18 +11,13 @@ def index(request):
 
 
 @api_view(['POST'])
-def add_user(request):
-    return users.add_user(request)
-
-
-@api_view(['POST'])
 def edit_user(request, user_id):
-    return users.Views().update_user(request, user_id)
+    return connection.Views().update_user(request, user_id)
 
 
 @api_view(['GET'])
 def get_user(request, user_id):
-    return users.Views().get_user(request, user_id)
+    return connection.Views().get_user(request, user_id)
 
 
 @api_view(['GET'])
@@ -109,22 +104,22 @@ def edit_store(request, document_id, data):
 
 @api_view(['PUT'])
 def update_email(request, email):
-    return users.Views().update_email(request, email)
+    return connection.Views().update_email(request, email)
 
 
 @api_view(['PUT'])
 def update_password(request, email):
-    return users.Views().update_password(request, email)
+    return connection.Views().update_password(request, email)
 
 
 @api_view(['DELETE'])
 def delete_user(request, email):
-    return users.Views().delete_user(request, email)
+    return connection.Views().delete_user(request, email)
 
 
 @api_view(['POST'])
 def register_user(request, email, password):
-    return users.Views().register_user(email, password)
+    return connection.Views().register_user(email, password)
 
 
 @api_view(['POST'])

@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from .firebase_connection import FirebaseConnection
 from singleton_decorator import singleton
 from GoogleNews import GoogleNews
 import json
