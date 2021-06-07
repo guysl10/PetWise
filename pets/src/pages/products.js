@@ -7,7 +7,7 @@ export default function Products() {
   const [pets, setPets] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('http://localhost:8000/petWise/adoption')
+    fetch('http://localhost:8000/petWise/products')
       .then(response => response.json())
       .then(
         data => {
