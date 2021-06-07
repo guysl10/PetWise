@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Pet from './pet';
 import ScriptTag from 'react-script-tag';
 import { LoadingOutlined } from '@ant-design/icons';
-import "antd/dist/antd.css";
 
 
 
