@@ -12,8 +12,7 @@ class Footer extends Component {
                             <h2 className="footer-heading">? עדיין נשארו שאלות</h2>
                             <div className="block-23 mb-3">
                                 <ul>
-                                    <li><span className="icon fa fa-map" /><span className="text">תל אביב, ישראל</span></li>
-                                    <li><a href="#"><span className="icon fa fa-phone" /><span className="text">03-9658542</span></a></li>
+                                    <li><span className="icon fa fa-map" /><span className="text">ראשון לציון, ישראל</span></li>
                                     <li><a href="#"><span className="icon fa fa-paper-plane" /><span className="text">info@petwize.com</span></a></li>
                                 </ul>
                             </div>

@@ -165,3 +165,7 @@ def get_pets_count(request):
 @api_view(['GET'])
 def get_products_count(request):
     return summary.Views().get_products_count(request)
+
+@api_view(['GET'])
+def get_adoptions_count(request):
+    return summary.Views().get_adoptions_count(request)

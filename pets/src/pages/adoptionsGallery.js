@@ -15,11 +15,7 @@ export default function AdoptionsGallery() {
         }
       )
   }, [])
-//   .then(response => response.json())
-//     .then(response => {
-//         console.log(response)
-//     })
-// }, [])
+
 
   return (
     <>

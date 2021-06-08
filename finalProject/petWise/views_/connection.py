@@ -38,3 +38,4 @@ class Views:
     def update_password(self, email):
         self.auth.send_password_reset_email(email)
         return HttpResponse("True")
+

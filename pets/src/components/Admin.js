@@ -2,9 +2,54 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScriptTag from 'react-script-tag';
 
-class Admin extends Component {
-   
-    render() {
+// class Admin extends Component {
+export default function Admin() {
+    const [pets_count, setPetsCount] = React.useState([]);
+    const [users_count, setUsersCount] = React.useState([]);
+    const [products_count, setProductsCount] = React.useState([]);
+    const [articles_count, setArticlesCount] = React.useState([]);
+
+   React.useEffect(() => {
+    fetch('http://localhost:8000/petWise/summary/pets')
+      .then(response => response.json())
+      .then(
+        data => {
+            setPetsCount(data.len);
+        }
+      )
+  }, [])
+
+   React.useEffect(() => {
+    fetch('http://localhost:8000/petWise/summary/products')
+      .then(response => response.json())
+      .then(
+        data => {
+            setProductsCount(data.len);
+        }
+      )
+  }, [])
+
+    React.useEffect(() => {
+    fetch('http://localhost:8000/petWise/summary/adoption_days')
+      .then(response => response.json())
+      .then(
+        data => {
+            setArticlesCount(data.len);
+        }
+      )
+  }, [])
+
+    React.useEffect(() => {
+    fetch('http://localhost:8000/petWise/summary/users')
+      .then(response => response.json())
+      .then(
+        data => {
+            setUsersCount(data.len);
+        }
+      )
+  }, [])
+
+
         return (
             <>
                 <div>
@@ -45,17 +90,17 @@ class Admin extends Component {
                                 <div className="w3-container w3-red w3-padding-16" style={{background: "linear-gradient(45deg, #207dff 0%, #00bd55 100%)", borderRadius: "10px"}}>
                                     <div className="w3-left"><i className="fa fa-comment w3-xxxlarge" /></div>
                                     <div className="w3-right">
-                                        <h3>52</h3>
+                                        <h3>{products_count}</h3>
                                     </div>
                                     <div className="w3-clear" />
-                                    <h4>מאמרים</h4>
+                                    <h4>ימי אימוץ</h4>
                                 </div>
                             </div>
                             <div className="w3-quarter">
                                 <div className="w3-container w3-blue w3-padding-16" style={{background: "linear-gradient(45deg, #207dff 0%, #00bd55 100%)", borderRadius: "10px"}}>
                                     <div className="w3-left"><i className="fa fa-eye w3-xxxlarge" /></div>
                                     <div className="w3-right">
-                                        <h3>99</h3>
+                                        <h3>{pets_count}</h3>
                                     </div>
                                     <div className="w3-clear" />
                                     <h4>חיות</h4>
@@ -65,69 +110,20 @@ class Admin extends Component {
                                 <div className="w3-container w3-teal w3-padding-16" style={{background: "linear-gradient(45deg, #207dff 0%, #00bd55 100%)", borderRadius: "10px"}}>
                                     <div className="w3-left"><i className="fa fa-share-alt w3-xxxlarge" /></div>
                                     <div className="w3-right">
-                                        <h3>23</h3>
+                                        <h3>{products_count}</h3>
                                     </div>
                                     <div className="w3-clear" />
-                                    <h4>ימי אימוץ</h4>
+                                    <h4>מוצרים</h4>
                                 </div>
                             </div>
                             <div className="w3-quarter">
                                 <div className="w3-container w3-orange w3-text-white w3-padding-16" style={{background: "linear-gradient(45deg, #207dff 0%, #00bd55 100%)", borderRadius: "10px"}}>
                                     <div className="w3-left"><i className="fa fa-users w3-xxxlarge" /></div>
                                     <div className="w3-right">
-                                        <h3>50</h3>
+                                        <h3>{users_count}</h3>
                                     </div>
                                     <div className="w3-clear" />
                                     <h4>יוזרים</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w3-panel">
-                            <div className="w3-row-padding" style={{ margin: '0 -16px' }}>
-                                <div className="w3-third">
-                                    <h5 style={{ textAlign: "right"}}>מקומות</h5>
-                                    {/* <img src="../assets/images/region.jpg" style={{ width: '100%' }} alt="Google Regional Map" /> */}
-                                    <iframe id="map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBufoc-dBsxm2QxbhuTBiyMJeWt9qweK1U&q=tel-aviv"></iframe>
-                                </div>
-                                <div className="w3-twothird">
-                                    <h5 style={{ textAlign: "right", padding: "0 1%"}}>עדכונים</h5>
-                                    <table className="w3-table w3-striped w3-white">
-                                        <tbody><tr>
-                                            <td><i className="fa fa-user w3-text-blue w3-large" /></td>
-                                            <td>New record, over 90 views.</td>
-                                            <td><i>10 mins</i></td>
-                                        </tr>
-                                            <tr>
-                                                <td><i className="fa fa-bell w3-text-red w3-large" /></td>
-                                                <td>Database error.</td>
-                                                <td><i>15 mins</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i className="fa fa-users w3-text-yellow w3-large" /></td>
-                                                <td>New record, over 40 users.</td>
-                                                <td><i>17 mins</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i className="fa fa-comment w3-text-red w3-large" /></td>
-                                                <td>New comments.</td>
-                                                <td><i>25 mins</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i className="fa fa-bookmark w3-text-blue w3-large" /></td>
-                                                <td>Check transactions.</td>
-                                                <td><i>28 mins</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i className="fa fa-laptop w3-text-red w3-large" /></td>
-                                                <td>CPU overload.</td>
-                                                <td><i>35 mins</i></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i className="fa fa-share-alt w3-text-green w3-large" /></td>
-                                                <td>New shares.</td>
-                                                <td><i>39 mins</i></td>
-                                            </tr>
-                                        </tbody></table>
                                 </div>
                             </div>
                         </div>
@@ -190,5 +186,5 @@ class Admin extends Component {
             </>
         ) 
     }
-}
-export default Admin;
+
+// export default Admin;
