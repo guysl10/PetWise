@@ -7,7 +7,7 @@ export default function Admin() {
     const [pets_count, setPetsCount] = React.useState([]);
     const [users_count, setUsersCount] = React.useState([]);
     const [products_count, setProductsCount] = React.useState([]);
-    const [articles_count, setArticlesCount] = React.useState([]);
+    const [adoption_days_count, setAdoptionDays] = React.useState([]);
 
    React.useEffect(() => {
     fetch('http://localhost:8000/petWise/summary/pets')
@@ -34,7 +34,7 @@ export default function Admin() {
       .then(response => response.json())
       .then(
         data => {
-            setArticlesCount(data.len);
+            setAdoptionDays(data.len);
         }
       )
   }, [])
@@ -90,7 +90,7 @@ export default function Admin() {
                                 <div className="w3-container w3-red w3-padding-16" style={{background: "linear-gradient(45deg, #207dff 0%, #00bd55 100%)", borderRadius: "10px"}}>
                                     <div className="w3-left"><i className="fa fa-comment w3-xxxlarge" /></div>
                                     <div className="w3-right">
-                                        <h3>{products_count}</h3>
+                                        <h3>{adoption_days_count}</h3>
                                     </div>
                                     <div className="w3-clear" />
                                     <h4>ימי אימוץ</h4>
