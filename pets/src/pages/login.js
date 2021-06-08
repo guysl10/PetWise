@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 export default function Login() {
@@ -45,9 +44,9 @@ export default function Login() {
         }));
 
         xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
+            if (this.readyState !== 4) return;
 
-            if (this.status == 200) {
+            if (this.status === 200) {
                 var data = JSON.parse(this.responseText);
                 console.log(data)
                 // we get the returned data
@@ -67,6 +66,7 @@ export default function Login() {
                                 <button className="loginButton" onClick={onClick}
                                 style={{ height: "50px",borderRadius: "10px",border: "none",backgroundColor: "#1775ee",color: "white",fontSize: "20px",fontWeight: "500",cursor: "pointer"}} >התחבר</button>
                                 <span className="loginForgot" onClick={forgotPassword} style={{  textAlign: "center",color: "#1775ee"}} >?שכחת סיסמה</span>
+                                <span className="register" onClick="location.href = /register" style={{  textAlign: "center",color: "#1775ee"}} >הרשמה</span>
                             </div>
                         </div>
                     </div>

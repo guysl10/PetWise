@@ -117,8 +117,8 @@ def delete_user(request, email):
 
 
 @api_view(['POST'])
-def register_user(request, email, password):
-    return connection.Views().register_user(email, password)
+def register_user(request):
+    return connection.Views().register_user(request.data['email'], request.data['password'])
 
 
 @api_view(['POST'])

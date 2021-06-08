@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function isLoggedIn() {
-    var isLoggedIn = false
+    let isLoggedIn = false;
     fetch('http://localhost:8000/petWise/user/is_logged_in').then(
         response => response.text()).then(
-            data => isLoggedIn = (data == "True"));
+            data => isLoggedIn = (data === "True"));
     return isLoggedIn
 }
 
