@@ -107,8 +107,8 @@ def update_email(request, email):
 
 
 @api_view(['PUT'])
-def update_password(request, email):
-    return connection.Views().update_password(request, email)
+def update_password(request):
+    return connection.Views().update_password(request.data['email'])
 
 
 @api_view(['DELETE'])

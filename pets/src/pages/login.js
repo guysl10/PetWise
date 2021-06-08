@@ -38,7 +38,8 @@ export default function Login() {
 
     const forgotPassword = () => {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", 'http://localhost:8000/petWise/forgot_password', true);
+        xhr.open("PUT", 'http://localhost:8000/petWise/forgot_password', true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(JSON.stringify({
             email: email,
         }));

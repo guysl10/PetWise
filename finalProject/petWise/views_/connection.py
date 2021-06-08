@@ -43,5 +43,8 @@ class Views:
         return HttpResponse("True")
 
     def update_password(self, email):
-        self.auth.send_password_reset_email(email)
+        try:
+            self.auth.send_password_reset_email(email)
+        except:
+            return HttpResponseBadRequest()
         return HttpResponse("True")
