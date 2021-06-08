@@ -167,6 +167,11 @@ def get_products_count(request):
 
 
 @api_view(['GET'])
+def get_adoptions_count(request):
+    return summary.Views().get_adoptions_count(request)
+
+
+@api_view(['GET'])
 def get_last_products(request):
     return summary.Views().get_last_products(request)
 
@@ -174,3 +179,4 @@ def get_last_products(request):
 @api_view(['GET'])
 def get_last_pets(request):
     return summary.Views().get_last_pets(request)
+
