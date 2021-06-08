@@ -26,7 +26,6 @@ def get_articles(request, search='אימוץ חיות'):
 
 
 @api_view(['GET'])
-
 def get_adoption(request):
     return adoption.Views().get_adoption(request)
 
@@ -165,3 +164,13 @@ def get_pets_count(request):
 @api_view(['GET'])
 def get_products_count(request):
     return summary.Views().get_products_count(request)
+
+
+@api_view(['GET'])
+def get_last_products(request):
+    return summary.Views().get_last_products(request)
+
+
+@api_view(['GET'])
+def get_last_pets(request):
+    return summary.Views().get_last_pets(request)
