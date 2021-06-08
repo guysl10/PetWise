@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
+
 # from firebase_admin import auth
 
 from db_serv import petwise_serv
@@ -13,7 +14,10 @@ class Views:
         self.db = petwise_serv.firebase_admin.database()
 
     def log_in(self, email, password):
-        self.auth.sign_in_with_email_and_password(email, password)
+        try:
+            self.auth.sign_in_with_email_and_password(email, password)
+        except:
+            return HttpResponseBadRequest()
         return HttpResponse("success login")
 
     def log_out(self):
@@ -23,6 +27,9 @@ class Views:
     def register(self, email, password):
         self.auth.create_user_with_email_and_password(email, password)
         return HttpResponse("registered successfully")
+
+    def is_logged_in(self, request):
+        return HttpResponse(self.auth.current_user is not None)
 
     def delete_user(self, request, email):
         # SignOut

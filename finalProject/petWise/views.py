@@ -26,7 +26,6 @@ def get_articles(request, search='אימוץ חיות'):
 
 
 @api_view(['GET'])
-
 def get_adoption(request):
     return adoption.Views().get_adoption(request)
 
@@ -123,9 +122,13 @@ def register_user(request, email, password):
 
 
 @api_view(['POST'])
-def log_in(request, email, password):
-    return connection.Views().log_in(email, password)
+def log_in(request):
+    return connection.Views().log_in(request.data['email'], request.data['password'])
 
+
+@api_view(['GET'])
+def is_logged_in(request):
+    return connection.Views().is_logged_in(request)
 
 @api_view(['GET'])
 def log_out(request):

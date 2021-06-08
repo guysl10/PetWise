@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
+function isLoggedIn() {
+    var isLoggedIn = false
+    fetch('http://localhost:8000/petWise/user/is_logged_in').then(
+        response => response.text()).then(
+            data => isLoggedIn = (data == "True"));
+    return isLoggedIn
+}
+
 class Header extends Component {
     render() {
         return (
@@ -13,7 +21,10 @@ class Header extends Component {
                                 <p className="mb-0 phone pl-md-2">
                                     <a href="/admin" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
                                     <span> | </span>
-                                    <a href="/login" className="btn btn-primary "> התחבר</a>
+                                    {isLoggedIn() ?
+                                    < a href="/login" className="btn btn-primary "> התחבר</a> :
+                                        < a href="/logout" className="btn btn-primary "> התנתק</a>
+                                    }
                                 </p>
                             </div>
 

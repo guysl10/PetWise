@@ -19,6 +19,7 @@ export default function Login() {
     const onClick = data => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", 'http://localhost:8000/petWise/login', true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(JSON.stringify({
             email: email,
             password: password
@@ -28,12 +29,10 @@ export default function Login() {
             if (this.readyState != 4) return;
 
             if (this.status == 200) {
-                var data = JSON.parse(this.responseText);
                 console.log(data)
-                // we get the returned data
+                window.location.href = '../';
             }
             console.log(this.status)
-            // end of state change: it can be after some time (async)
         };
     };
 
@@ -56,7 +55,6 @@ export default function Login() {
             // end of state change: it can be after some time (async)
         };
     };
-    }
         return (
             <>
                 <div className="login" style={{ backgroundImage: 'url("../assets/images/bg_2.jpg")' ,width: "99vw", height: "70vh", backgroundColor: "#f0f2f5", display: "flex",alignItems: "center",justifyContent: "center"}}>
@@ -67,7 +65,7 @@ export default function Login() {
                                 <input type="password" placeholder="סיסמה" className="loginInput" onChange={handlePasswordChanged} style={{ height: "50px",borderRadius: "10px",border: "1px solid gray",fontSize: "18px",paddingLeft: "20px"}} />
                                 <button className="loginButton" onClick={onClick}
                                 style={{ height: "50px",borderRadius: "10px",border: "none",backgroundColor: "#1775ee",color: "white",fontSize: "20px",fontWeight: "500",cursor: "pointer"}} >התחבר</button>
-                                <span className="loginForgot" onClick={} style={{  textAlign: "center",color: "#1775ee"}} >?שכחת סיסמה</span>
+                                <span className="loginForgot" onClick={forgotPassword} style={{  textAlign: "center",color: "#1775ee"}} >?שכחת סיסמה</span>
                             </div>
                         </div>
                     </div>
