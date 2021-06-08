@@ -12,8 +12,9 @@ class Views:
 
     def get_adoption_by_id(self, request, document_id):
         adoption = self.firestore_client.collection(u'pets').document(
-            document_id).get()
-        return HttpResponse(adoption)
+            document_id).get().to_dict()
+
+        return HttpResponse(json.dumps(adoption))
 
     def get_adoption(self, request):
         adoptions = [doc.get().to_dict() for doc in
