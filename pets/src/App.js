@@ -11,7 +11,7 @@ import adoptionsGallery from './pages/adoptionsGallery';
 import articles from './pages/articles';
 import Associations from './pages/association';
 import home from './pages/home';
-import login from './pages/login';
+import Login from './pages/login';
 import profile from './pages/profile';
 import editProfile from './pages/editProfile';
 import Search from './components/Search';
@@ -31,7 +31,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={home} />
           <Route exact path="/profile" component={profile} />
-          <Route exact path="/login" component={login} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/adminPets" component={AdminPets} />
           <Route exact path="/adminViewPet" component={AdminViewPet} />
