@@ -107,8 +107,8 @@ def update_email(request, email):
 
 
 @api_view(['PUT'])
-def update_password(request, email):
-    return connection.Views().update_password(request, email)
+def update_password(request):
+    return connection.Views().update_password(request.data['email'])
 
 
 @api_view(['DELETE'])
@@ -117,14 +117,18 @@ def delete_user(request, email):
 
 
 @api_view(['POST'])
-def register_user(request, email, password):
-    return connection.Views().register_user(email, password)
+def register_user(request):
+    return connection.Views().register(request.data['email'], request.data['password'])
 
 
 @api_view(['POST'])
-def log_in(request, email, password):
-    return connection.Views().log_in(email, password)
+def log_in(request):
+    return connection.Views().log_in(request.data['email'], request.data['password'])
 
+
+@api_view(['GET'])
+def is_logged_in(request):
+    return connection.Views().is_logged_in(request)
 
 @api_view(['GET'])
 def log_out(request):

@@ -18,6 +18,7 @@ urlpatterns = [
     path('users/delete/<str:user_id>', views.delete_user, name='delete_user'),
     path('users/edit/<str:user_id>', views.edit_user, name='edit_user'),
     path('login', views.log_in, name='log_in'),
+    path('user/is_logged_in', views.is_logged_in, name='is_logged_in'),
     path('logout', views.log_out, name='log_out'),
     path('products/<str:label>', views.get_products, name='get_products'),
     path('products/delete/<str:document_id>', views.delete_product, name='delete_product'),
