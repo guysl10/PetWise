@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+export default function Header() {
 
-function isLoggedIn() {
-    let isLoggedIn = false;
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+
     fetch('http://localhost:8000/petWise/user/is_logged_in').then(
         response => response.text()).then(
-            data => isLoggedIn = (data === "True"));
-    return isLoggedIn
-}
+        data => setIsLoggedIn(data === "True"));
 
-class Header extends Component {
-    render() {
         return (
             <div>
                 <div className="wrap">
@@ -21,7 +19,7 @@ class Header extends Component {
                                 <p className="mb-0 phone pl-md-2">
                                     <a href="/admin2" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
                                     <span> | </span>
-                                    {isLoggedIn() ?
+                                    {isLoggedIn ?
                                     < a href="/logout" className="btn btn-primary ">התנתק</a> :
                                         < a href="/login" className="btn btn-primary "> התחבר</a>
                                     }
@@ -61,6 +59,4 @@ class Header extends Component {
                 </nav>
             </div>
         )
-    }
 }
-export default Header;
