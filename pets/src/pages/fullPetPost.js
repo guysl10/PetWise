@@ -90,7 +90,6 @@ export default function FullPetPost() {
                     </div>
                 </div>
                 <div className="col-md-5 d-flex align-items-stretch">
-                    {console.log(details)}
                     {details.length != 0 && <div className="info-wrap w-100 p-5 img"
                         style={{ backgroundImage: `url(${details.images[0]})` }}
                     >
