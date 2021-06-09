@@ -21,6 +21,11 @@ def get_user(request, user_id):
 
 
 @api_view(['GET'])
+def get_users(request):
+    return connection.Views().get_users(request)
+
+
+@api_view(['GET'])
 def get_articles(request, search='אימוץ חיות'):
     return articles.Views().get_articles(request, search)
 
