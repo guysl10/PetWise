@@ -48,3 +48,4 @@ class Views:
         except:
             return HttpResponseBadRequest()
         return HttpResponse("True")
+

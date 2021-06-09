@@ -10,7 +10,7 @@ export default function Articles() {
   const [fetchdArticles, setFetchedArticles] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('http://localhost:8000/petWise/articles')
+    fetch('http://localhost:8000/petwise/summary/pets')
       .then(response => response.json())
       .then(
         data => {

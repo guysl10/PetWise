@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-
-
-
 export default function Header() {
 
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -20,7 +17,7 @@ export default function Header() {
                         <div className="row">
                             <div className="col-md-6 d-flex align-items-center">
                                 <p className="mb-0 phone pl-md-2">
-                                    <a href="/admin" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
+                                    <a href="/admin2" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
                                     <span> | </span>
                                     {isLoggedIn ?
                                     < a href="/logout" className="btn btn-primary ">התנתק</a> :
@@ -51,7 +48,6 @@ export default function Header() {
                                 <li className="nav-item"><a href="/articles" className="nav-link">כתבות</a></li>
                                 <li className="nav-item"><a href="/pets" className="nav-link">חיות</a></li>
                                 <li className="nav-item"><a href="/adoptionsGallery" className="nav-link">ימי אימוץ</a></li>
-                                <li className="nav-item"><a href="/products" className="nav-link">מוצרים</a></li>
                                 <li className="nav-item"><a href="/profile" className="nav-link">פרופיל</a></li>
                                 <li className="nav-item active"><a href="/" className="nav-link">בית</a></li>
                             </ul>

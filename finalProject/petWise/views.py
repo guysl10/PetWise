@@ -117,8 +117,8 @@ def delete_user(request, email):
 
 
 @api_view(['POST'])
-def register_user(request, email, password):
-    return connection.Views().register_user(email, password)
+def register_user(request):
+    return connection.Views().register(request.data['email'], request.data['password'])
 
 
 @api_view(['POST'])
@@ -168,3 +168,19 @@ def get_pets_count(request):
 @api_view(['GET'])
 def get_products_count(request):
     return summary.Views().get_products_count(request)
+
+
+@api_view(['GET'])
+def get_adoptions_count(request):
+    return summary.Views().get_adoptions_count(request)
+
+
+@api_view(['GET'])
+def get_last_products(request):
+    return summary.Views().get_last_products(request)
+
+
+@api_view(['GET'])
+def get_last_pets(request):
+    return summary.Views().get_last_pets(request)
+
