@@ -24,7 +24,7 @@ urlpatterns = [
     path('products/delete/<str:document_id>', views.delete_product, name='delete_product'),
     path('use_analytics/add', views.add_use_analytics, name='add_use_analytics'),
     path('summary/users', views.get_users_count, name='get_users_count'),
-    path('summary/adoption_days', views.get_adoption_days,
+    path('summary/adoption_days', views.get_adoption_days_count,
          name='get_adoption_days'),
     path('summary/pets', views.get_pets_count, name='get_pets_count'),
     path('summary/products', views.get_products_count, name='get_products_count'),
