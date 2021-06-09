@@ -22,8 +22,8 @@ class Header extends Component {
                                     <a href="/admin" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
                                     <span> | </span>
                                     {isLoggedIn() ?
-                                    < a href="/login" className="btn btn-primary "> התחבר</a> :
-                                        < a href="/logout" className="btn btn-primary "> התנתק</a>
+                                    < a href="/logout" className="btn btn-primary ">התנתק</a> :
+                                        < a href="/login" className="btn btn-primary "> התחבר</a>
                                     }
                                 </p>
                             </div>
