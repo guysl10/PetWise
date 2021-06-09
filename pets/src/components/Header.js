@@ -49,7 +49,7 @@ export default function Header() {
                                 <li className="nav-item"><a href="/pets" className="nav-link">חיות</a></li>
                                 <li className="nav-item"><a href="/adoptionsGallery" className="nav-link">ימי אימוץ</a></li>
                                 <li className="nav-item"><a href="/profile" className="nav-link">פרופיל</a></li>
-                                <li className="nav-item active"><a href="/" className="nav-link">בית</a></li>
+                                <li className="nav-item"><a href="/" className="nav-link">בית</a></li>
                             </ul>
                         </div>
 

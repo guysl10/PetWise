@@ -52,6 +52,19 @@
   <script src="%PUBLIC_URL%/assets/js/google-map.js"></script>
   <script src="%PUBLIC_URL%/assets/js/main.js"></script>
 
+  <script>
+    //header active links: 
+    var a = document.querySelectorAll(".navbar-nav li a");
+    for (var i = 0, length = a.length; i < length; i++) {
+      a[i].onclick = function () {
+        var b = document.querySelector(".navbar-nav ml-auto li.active");
+        if (b) b.classList.remove("active");
+        this.parentNode.classList.add('active');
+      };
+    }
+
+
+  </script>
 </body>
 
 </html>
