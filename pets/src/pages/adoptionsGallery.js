@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import PetGalleryItem from './petGalleryItem';
+import {Spin} from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 
 export default function AdoptionsGallery() {
@@ -16,6 +21,14 @@ export default function AdoptionsGallery() {
       )
   }, [])
 
+  const loading = () => {
+    if(pets.length == 0) {
+      return <Spin tip="בטעינה..." indicator={antIcon} style={{
+        position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}/>
+    }
+  };
 
   return (
     <>
@@ -34,7 +47,12 @@ export default function AdoptionsGallery() {
         <section className="ftco-section">
           <div className="container">
             <div className="row">
-              {pets.map((data, key) => {
+              {
+                loading()
+              }
+              {pets &&
+              pets.length > 0 &&
+              pets.map((data, key) => {
                 return <PetGalleryItem key={key} description={data.description} link={data.link} title={data.title} />
               })}
             </div>
