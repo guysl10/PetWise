@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Pet from "../pages/pet";
+import Article from "../pages/article";
 
 export default function AdminOverview() {
     const [pets_count, setPetsCount] = React.useState([]);
     const [users_count, setUsersCount] = React.useState([]);
     const [products_count, setProductsCount] = React.useState([]);
-    const [articles_count, setArticlesCount] = React.useState([]);
+    const [adoption_days_count, setAdoptionDays] = React.useState([]);
+    const [latestpets, setLatestPets] = React.useState([]);
+    const [latestproducts, setLatestProducts] = React.useState([]);
 
    React.useEffect(() => {
     fetch('http://localhost:8000/petWise/summary/pets')
@@ -31,7 +35,7 @@ export default function AdminOverview() {
       .then(response => response.json())
       .then(
         data => {
-            setArticlesCount(data.len);
+            setAdoptionDays(data.len);
         }
       )
   }, [])
@@ -45,6 +49,29 @@ export default function AdminOverview() {
         }
       )
   }, [])
+
+  React.useEffect(() => {
+    fetch('http://localhost:8000/petWise/summary/last_pets')
+      .then(response => response.json())
+      .then(
+        data => {
+            console.log("latest_pets = ",data.data);
+          setLatestPets(data.data);
+        }
+      )
+  }, [])
+
+  React.useEffect(() => {
+    fetch('http://localhost:8000/petWise/summary/last_products')
+      .then(response => response.json())
+      .then(
+        data => {
+            console.log(data.data);
+          setLatestProducts(data.data);
+        }
+      )
+  }, [])
+
 
 
         return (
@@ -93,61 +120,50 @@ export default function AdminOverview() {
                         </div>
                         <hr />
                         <div className="w3-container">
-                            <h5 style={{ textAlign: "right", padding: "0 1%"}}>עוד נתונים</h5>
-                            <p style={{ textAlign: "right", padding: "0 1%"}}>מבקרים חדשים</p>
-                            <div className="w3-grey">
-                                <div className="w3-container w3-center w3-padding" style={{ width: '25%' , backgroundColor:"#00bd56"}}>+25%</div>
-                            </div>
-                            <p style={{ textAlign: "right", padding: "0 1%"}}>משתמשים חדשים</p>
-                            <div className="w3-grey">
-                                <div className="w3-container w3-center w3-padding" style={{ width: '50%', backgroundColor:"#00bd56" }}>50%</div>
-                            </div>
-                        </div>
-                        <hr />
-                        <hr />
-
-                        <div className="w3-container">
                             <h5 style={{ textAlign: "right", padding: "0 1%"}}>חיות שנוספו לאחרונה</h5>
-                            <ul className="w3-ul w3-card-4 w3-white">
-                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    <img src="../assets/images/gallery-5.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">מיקי</span><br />
-                                </li>
-                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    <img src="../assets/images/gallery-6.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">סימבה</span><br />
-                                </li>
-                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    <img src="../assets/images/gallery-7.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">קייט</span><br />
-                                </li>
-                            </ul>
+                            <div className="row">
+
+                                            {
+                                            latestpets.map((data, key) => {
+                                            return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
+                                          })}
+                            </div>
                         </div>
                         <hr />
 
                         <div className="w3-container">
                             <h5 style={{ textAlign: "right", padding: "0 1%"}}>ימי אימוץ שנוספו לאחרונה</h5>
-                            <div className="w3-row">
-                                <div className="w3-col m2 text-center">
-                                    <img className="w3-circle" src="../assets/images/image_1.jpg" style={{ width: '96px', height: '96px' }} />
-                                </div>
-                                <div className="w3-col m10 w3-container">
-                                    <h4>John <span className="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-                                    <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />
-                                </div>
+                            <div className="row">
+                                    {latestproducts.map((data, key) => {
+                                    return <Article key={key} datetime={data.datetime} desc={data.desc} title={data.title} date={data.date} link={data.link} />
+                                  })}
                             </div>
-                            <div className="w3-row">
-                                <div className="w3-col m2 text-center">
-                                    <img className="w3-circle" src="../assets/images/image_2.jpg" style={{ width: '96px', height: '96px' }} />
-                                </div>
-                                <div className="w3-col m10 w3-container">
-                                    <h4>Bo <span className="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-                                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />
-                                </div>
-                            </div>
+
+
+
+
+
+                            {/*<div className="w3-row">*/}
+                            {/*    <div className="w3-col m2 text-center">*/}
+                            {/*        <img className="w3-circle" src="../assets/images/image_1.jpg" style={{ width: '96px', height: '96px' }} />*/}
+                            {/*    </div>*/}
+                            {/*    <div className="w3-col m10 w3-container">*/}
+                            {/*        <h4>John <span className="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>*/}
+                            {/*        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="w3-row">*/}
+                            {/*    <div className="w3-col m2 text-center">*/}
+                            {/*        <img className="w3-circle" src="../assets/images/image_2.jpg" style={{ width: '96px', height: '96px' }} />*/}
+                            {/*    </div>*/}
+                            {/*    <div className="w3-col m10 w3-container">*/}
+                            {/*        <h4>Bo <span className="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>*/}
+                            {/*        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                         <br />
-      
+
             </>
-        ) 
+        )
     }

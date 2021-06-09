@@ -1,7 +1,11 @@
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseNotFound, \
+    HttpResponseBadRequest, JsonResponse
 
-from db_serv import petwise_serv
+
+# from firebase_admin import auth
 import db_serv
+from db_serv import petwise_serv
+
 
 from singleton_decorator import singleton
 
@@ -64,3 +68,10 @@ class Views:
         except:
             return HttpResponseBadRequest()
         return HttpResponse("True")
+
+    def get_users(self, request):
+        users = [doc.get().to_dict() for doc in
+                 db_serv.petwise_serv.firestore_client.collection(
+                     u'users').list_documents()]
+
+        return JsonResponse({'data': users})

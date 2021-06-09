@@ -33,18 +33,13 @@ export default function Pets() {
         }
       )
   }, [])
-//     .then(response => response.json())
-//     .then(response => {
-//         console.log(response)
-//     })
-// }, [])
 
   const onSearch = value => {
-    if (value == '') {
+    if (value === '') {
       setPets(fetchdPets)
     } else {
       setPets(fetchdPets.filter((data, key) => {
-        if (data.description.search(value) != -1) {
+        if (data.description.search(value) !== -1) {
           const d = {}
           d[key] = data
           return d
@@ -65,7 +60,7 @@ export default function Pets() {
   };
 
   const loading = () => {
-    if(pets.length == 0) {
+    if(pets.length === 0) {
       return <Spin tip="בטעינה..." indicator={antIcon} style={{
         position: 'absolute', left: '50%', top: '50%',
         transform: 'translate(-50%, -50%)'
