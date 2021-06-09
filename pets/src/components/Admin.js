@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScriptTag from 'react-script-tag';
+import Pet from "../pages/pet";
 
 // class Admin extends Component {
 export default function Admin() {
@@ -8,6 +9,7 @@ export default function Admin() {
     const [users_count, setUsersCount] = React.useState([]);
     const [products_count, setProductsCount] = React.useState([]);
     const [adoption_days_count, setAdoptionDays] = React.useState([]);
+    const [latestpets, setLatestPets] = React.useState([]);
 
    React.useEffect(() => {
     fetch('http://localhost:8000/petWise/summary/pets')
@@ -49,6 +51,16 @@ export default function Admin() {
       )
   }, [])
 
+      React.useEffect(() => {
+    fetch('http://localhost:8000/petWise/summary/last_pets')
+      .then(response => response.json())
+      .then(
+        data => {
+            console.log(data.data)
+          setLatestPets(data.data)
+        }
+      )
+  }, [])
 
         return (
             <>
@@ -144,18 +156,24 @@ export default function Admin() {
                         <div className="w3-container">
                             <h5 style={{ textAlign: "right", padding: "0 1%"}}>חיות שנוספו לאחרונה</h5>
                             <ul className="w3-ul w3-card-4 w3-white">
-                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    <img src="../assets/images/gallery-5.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">מיקי</span><br />
-                                </li>
-                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    <img src="../assets/images/gallery-6.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">סימבה</span><br />
-                                </li>
-                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    <img src="../assets/images/gallery-7.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />
-                                    <span className="">קייט</span><br />
-                                </li>
+                                {/*<li className="w3-padding-16" style={{ textAlign: "center" }}>*/}
+                                {/*    <img src="../assets/images/gallery-5.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />*/}
+                                {/*    <span className="">מיקי</span><br />*/}
+                                {/*</li>*/}
+                                {/*<li className="w3-padding-16" style={{ textAlign: "center" }}>*/}
+                                {/*    <img src="../assets/images/gallery-6.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />*/}
+                                {/*    <span className="">סימבה</span><br />*/}
+                                {/*</li>*/}
+                                {/*<li className="w3-padding-16" style={{ textAlign: "center" }}>*/}
+                                {/*    <img src="../assets/images/gallery-7.jpg" className="w3-circle w3-margin-right" style={{ width: '55px' }} />*/}
+                                {/*    <span className="">קייט</span><br />*/}
+                                {/*</li>*/}
+                                <div>
+                                    {
+              latestpets.map((data, key) => {
+                return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
+              })}
+                                        </div>
                             </ul>
                         </div>
                         <hr />
