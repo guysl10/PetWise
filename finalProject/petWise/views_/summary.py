@@ -38,6 +38,6 @@ class Views:
         query = collection.order_by(
             u'id', direction=firestore.Query.DESCENDING).limit(3)
         results = query.stream()
-        return HttpResponse([result.to_dict() for result in results])
+        return JsonResponse({'data': [result.to_dict() for result in results]})
 
 

@@ -54,8 +54,8 @@ export default function AdminOverview() {
       .then(response => response.json())
       .then(
         data => {
-            console.log(data.data);
-          setLatestPets(data.data);
+            console.log(data.data.data);
+          setLatestPets(data.data.data);
         }
       )
   }, [])
@@ -65,11 +65,17 @@ export default function AdminOverview() {
       .then(response => response.json())
       .then(
         data => {
-            console.log(data.data);
-          setLatestProducts(data.data);
+            console.log(data.data.data);
+          setLatestProducts(data.data.data);
         }
       )
   }, [])
+
+    const listpets = latestpets.map((pet) =>
+        <ul key={pet.toString()}>
+            {<Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />}
+        </ul>
+    );
 
         return (
             <>
@@ -117,29 +123,18 @@ export default function AdminOverview() {
                         </div>
                         <hr />
                         <div className="w3-container">
-                            <h5 style={{ textAlign: "right", padding: "0 1%"}}>עוד נתונים</h5>
-                            <p style={{ textAlign: "right", padding: "0 1%"}}>מבקרים חדשים</p>
-                            <div className="w3-grey">
-                                <div className="w3-container w3-center w3-padding" style={{ width: '25%' , backgroundColor:"#00bd56"}}>+25%</div>
-                            </div>
-                            <p style={{ textAlign: "right", padding: "0 1%"}}>משתמשים חדשים</p>
-                            <div className="w3-grey">
-                                <div className="w3-container w3-center w3-padding" style={{ width: '50%', backgroundColor:"#00bd56" }}>50%</div>
-                            </div>
-                        </div>
-                        <hr />
-                        <hr />
-
-                        <div className="w3-container">
                             <h5 style={{ textAlign: "right", padding: "0 1%"}}>חיות שנוספו לאחרונה</h5>
                                 <ul className="w3-ul w3-card-4 w3-white">
                                 <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    <div>
-                                        {
-                                          latestpets.map((data, key) => {
-                                            return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
-                                          })}
-                                    </div>
+                                    {listpets}
+
+                                    {/*<div>*/}
+                                    {/*        {*/}
+                                    {/*        latestpets.map((pet)=>{pet.map((data, key) => {*/}
+                                    {/*        return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />*/}
+                                    {/*      })*/}
+                                    {/*        })}*/}
+                                    {/*</div>*/}
                                 </li>
                             </ul>
                         </div>
