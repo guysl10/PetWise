@@ -113,7 +113,7 @@ export default function Pets() {
               {pets &&
               pets.length > 0 &&
               pets.slice(minValue, maxValue).map((data, key) => {
-                return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
+                return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data["מספר מודעה"]} />
               })}
             </div>
 

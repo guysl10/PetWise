@@ -19,7 +19,7 @@ class Header extends Component {
                         <div className="row">
                             <div className="col-md-6 d-flex align-items-center">
                                 <p className="mb-0 phone pl-md-2">
-                                    <a href="/admin" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
+                                    <a href="/admin2" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
                                     <span> | </span>
                                     {isLoggedIn() ?
                                     < a href="/logout" className="btn btn-primary ">התנתק</a> :
