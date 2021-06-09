@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 export default function Header() {
 
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    const [isAdmin, setIsAdmin] = React.useState(false);
 
+    fetch('http://localhost:8000/petWise/user/is_admin').then(
+        response => response.text()).then(
+        data => setIsLoggedIn(data === "True"));
 
     fetch('http://localhost:8000/petWise/user/is_logged_in').then(
         response => response.text()).then(
@@ -43,10 +47,10 @@ export default function Header() {
                             </ul>
                         </div>
 
-                        <a className="navbar-brand" href="/"><span className="flaticon-pawprint-1 mr-2" />Petwize</a>
+                    <a className="navbar-brand" href="/"><span className="flaticon-pawprint-1 mr-2"/>Petwize</a>
 
-                    </div>
-                </nav>
-            </div>
-        )
+                </div>
+            </nav>
+        </div>
+    )
 }

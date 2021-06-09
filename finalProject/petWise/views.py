@@ -123,7 +123,7 @@ def delete_user(request, email):
 
 @api_view(['POST'])
 def register_user(request):
-    return connection.Views().register(request.data['email'], request.data['password'])
+    return connection.Views().register(request.data['email'], request.data['password'], request.data['username'])
 
 
 @api_view(['POST'])
@@ -134,6 +134,12 @@ def log_in(request):
 @api_view(['GET'])
 def is_logged_in(request):
     return connection.Views().is_logged_in(request)
+
+
+@api_view(['GET'])
+def is_admin(request):
+    return connection.Views().is_admin()
+
 
 @api_view(['GET'])
 def log_out(request):
