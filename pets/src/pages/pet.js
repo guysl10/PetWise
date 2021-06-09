@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 export default function Pet({ description, url, images ,type, name, spec }) {
-    const specific = "/adoption/"+ spec;
+    const specific = "/pets/id/"+ spec;
+    
 
     return (
         <div className="col-md-4 ">
@@ -11,6 +13,7 @@ export default function Pet({ description, url, images ,type, name, spec }) {
                     <div className="text w-100 mb-3" style={{textAlign: "center"}}>
                         <span>{name}</span>
                         <h2><Link to={specific}>{type}</Link></h2>
+                       
                     </div>
                 </div>
             </div>
