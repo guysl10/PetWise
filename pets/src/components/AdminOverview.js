@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Pet from "../pages/pet";
+import Article from "../pages/article";
 
 export default function AdminOverview() {
     const [pets_count, setPetsCount] = React.useState([]);
@@ -54,8 +55,8 @@ export default function AdminOverview() {
       .then(response => response.json())
       .then(
         data => {
-            console.log(data.data.data);
-          setLatestPets(data.data.data);
+            console.log("latest_pets = ",data.data);
+          setLatestPets(data.data);
         }
       )
   }, [])
@@ -65,17 +66,13 @@ export default function AdminOverview() {
       .then(response => response.json())
       .then(
         data => {
-            console.log(data.data.data);
-          setLatestProducts(data.data.data);
+            console.log(data.data);
+          setLatestProducts(data.data);
         }
       )
   }, [])
 
-    const listpets = latestpets.map((pet) =>
-        <ul key={pet.toString()}>
-            {<Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />}
-        </ul>
-    );
+
 
         return (
             <>
@@ -124,45 +121,49 @@ export default function AdminOverview() {
                         <hr />
                         <div className="w3-container">
                             <h5 style={{ textAlign: "right", padding: "0 1%"}}>חיות שנוספו לאחרונה</h5>
-                                <ul className="w3-ul w3-card-4 w3-white">
-                                <li className="w3-padding-16" style={{ textAlign: "center" }}>
-                                    {listpets}
+                            <div className="row">
 
-                                    {/*<div>*/}
-                                    {/*        {*/}
-                                    {/*        latestpets.map((pet)=>{pet.map((data, key) => {*/}
-                                    {/*        return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />*/}
-                                    {/*      })*/}
-                                    {/*        })}*/}
-                                    {/*</div>*/}
-                                </li>
-                            </ul>
+                                            {
+                                            latestpets.map((data, key) => {
+                                            return <Pet key={key} description={data.description} url={data.url} images={data.images} type={data["סוג"]} name={data["שם בעל חיים"]} spec={data.id}  />
+                                          })}
+                            </div>
                         </div>
                         <hr />
 
                         <div className="w3-container">
                             <h5 style={{ textAlign: "right", padding: "0 1%"}}>ימי אימוץ שנוספו לאחרונה</h5>
-                            <div className="w3-row">
-                                <div className="w3-col m2 text-center">
-                                    <img className="w3-circle" src="../assets/images/image_1.jpg" style={{ width: '96px', height: '96px' }} />
-                                </div>
-                                <div className="w3-col m10 w3-container">
-                                    <h4>John <span className="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-                                    <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />
-                                </div>
+                            <div className="row">
+                                    {latestproducts.map((data, key) => {
+                                    return <Article key={key} datetime={data.datetime} desc={data.desc} title={data.title} date={data.date} link={data.link} />
+                                  })}
                             </div>
-                            <div className="w3-row">
-                                <div className="w3-col m2 text-center">
-                                    <img className="w3-circle" src="../assets/images/image_2.jpg" style={{ width: '96px', height: '96px' }} />
-                                </div>
-                                <div className="w3-col m10 w3-container">
-                                    <h4>Bo <span className="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-                                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />
-                                </div>
-                            </div>
+
+
+
+
+
+                            {/*<div className="w3-row">*/}
+                            {/*    <div className="w3-col m2 text-center">*/}
+                            {/*        <img className="w3-circle" src="../assets/images/image_1.jpg" style={{ width: '96px', height: '96px' }} />*/}
+                            {/*    </div>*/}
+                            {/*    <div className="w3-col m10 w3-container">*/}
+                            {/*        <h4>John <span className="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>*/}
+                            {/*        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="w3-row">*/}
+                            {/*    <div className="w3-col m2 text-center">*/}
+                            {/*        <img className="w3-circle" src="../assets/images/image_2.jpg" style={{ width: '96px', height: '96px' }} />*/}
+                            {/*    </div>*/}
+                            {/*    <div className="w3-col m10 w3-container">*/}
+                            {/*        <h4>Bo <span className="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>*/}
+                            {/*        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br />*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                         <br />
-      
+
             </>
-        ) 
+        )
     }
