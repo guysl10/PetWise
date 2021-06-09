@@ -19,7 +19,7 @@ class Header extends Component {
                         <div className="row">
                             <div className="col-md-6 d-flex align-items-center">
                                 <p className="mb-0 phone pl-md-2">
-                                    <a href="/admin2" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
+                                    <a href="/admin" className="mr-2"><span className="fa fa-paper-plane mr-1" /> תצוגת אדמין</a>
                                     <span> | </span>
                                     {isLoggedIn() ?
                                     < a href="/logout" className="btn btn-primary ">התנתק</a> :
@@ -27,14 +27,6 @@ class Header extends Component {
                                     }
                                 </p>
                             </div>
-
-                            {/*<div className="col-md-6 d-flex justify-content-md-end">*/}
-                            {/*    <form>*/}
-                            {/*        <input type="text" className="main-search-header" placeholder="חיפוש " />*/}
-                            {/*    </form>*/}
-                            {/*</div>*/}
-
-
                         </div>
                     </div>
                 </div>
@@ -45,8 +37,6 @@ class Header extends Component {
                 </button>
                         <div className="collapse navbar-collapse" id="ftco-nav">
                             <ul className="navbar-nav ml-auto">
-                                {/* <li className="nav-item"><a href="/contact" className="nav-link">צור קשר</a></li> */}
-                                {/* <li className="nav-item"><a href="/associations" className="nav-link">ארגונים</a></li> */}
                                 <li className="nav-item"><a href="/articles" className="nav-link">כתבות</a></li>
                                 <li className="nav-item"><a href="/pets" className="nav-link">חיות</a></li>
                                 <li className="nav-item"><a href="/adoptionsGallery" className="nav-link">ימי אימוץ</a></li>

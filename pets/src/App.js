@@ -21,7 +21,7 @@ import Pets from './pages/pets';
 import AdminUsers from './components/AdminUsers';
 import Categories from './pages/categories';
 import FullPetPost from './pages/fullPetPost';
-import Admin2 from './components/Admin2';
+import Admin2 from './components/Admin';
 
 function App() {
   return (
@@ -39,8 +39,8 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/logout" component={Logout} />
             
-          <Route exact path="/admin2" component={Admin2} />
-         {/*  <Route exact path="/admin" component={Admin} /> */}
+          {/*<Route exact path="/admin" component={Admin} />*/}
+           <Route exact path="/admin" component={Admin} />
 
           <Route exact path="/adminPets" component={AdminPets} />
           <Route exact path="/adminViewPet" component={AdminViewPet} />
