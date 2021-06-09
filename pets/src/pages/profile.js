@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Recommendations from "../components/Recommendations";
 
 
 class profile extends Component {
@@ -21,6 +22,8 @@ class profile extends Component {
                             </div>
                         </div>
                     </section>
+
+                   <Recommendations />
 
                     <section className="ftco-section" style={{ padding: "4em 0em" }}>
                         <div className="media-body user-area" style={{ margin: "0em 25em" }}>
@@ -46,6 +49,8 @@ class profile extends Component {
                         </div>
                     </section>
 
+
+{/* 
                     <section className="ftco-section bg-light">
                         <div className="container" style={{ display: "flex" }}>
                             <div className="" style={{ flex: "2" }}>
@@ -162,107 +167,10 @@ class profile extends Component {
                                 </div>
                             </div>
 
-                            {/* 
-                            <div className="space" style={{ flex: "2", marginRight: "10%", borderRight: "1px solid #00000024" }}></div>
-
-                            <div className="" style={{ flex: "6" }}>
-                                <div className="row">
-                                    <h3 className="heading">חיות</h3>
-                                </div>
-                                <br />
-                                <div className="row d-flex" >
-                                    <div className="col-md-4 d-flex ">
-                                        <div className="blog-entry align-self-stretch">
-                                            <a href="blog-single.html" className="block-20 rounded" style={{ backgroundImage: 'url("../assets/images/image_1.jpg")' }}>
-                                            </a>
-                                            <div className="text p-4">
-                                                <div className="meta mb-2">
-                                                    <div><a href="#">April 07, 2020</a></div>
-                                                    <div><a href="#">Admin</a></div>
-                                                    <div><a href="#" className="meta-chat"><span className="fa fa-comment" /> 3</a></div>
-                                                </div>
-                                                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 d-flex ">
-                                        <div className="blog-entry align-self-stretch">
-                                            <a href="blog-single.html" className="block-20 rounded" style={{ backgroundImage: 'url("../assets/images/image_2.jpg")' }}>
-                                            </a>
-                                            <div className="text p-4">
-                                                <div className="meta mb-2">
-                                                    <div><a href="#">April 07, 2020</a></div>
-                                                    <div><a href="#">Admin</a></div>
-                                                    <div><a href="#" className="meta-chat"><span className="fa fa-comment" /> 3</a></div>
-                                                </div>
-                                                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 d-flex ">
-                                        <div className="blog-entry align-self-stretch">
-                                            <a href="blog-single.html" className="block-20 rounded" style={{ backgroundImage: 'url("../assets/images/image_3.jpg")' }}>
-                                            </a>
-                                            <div className="text p-4">
-                                                <div className="meta mb-2">
-                                                    <div><a href="#">April 07, 2020</a></div>
-                                                    <div><a href="#">Admin</a></div>
-                                                    <div><a href="#" className="meta-chat"><span className="fa fa-comment" /> 3</a></div>
-                                                </div>
-                                                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 d-flex ">
-                                        <div className="blog-entry align-self-stretch">
-                                            <a href="blog-single.html" className="block-20 rounded" style={{ backgroundImage: 'url("../assets/images/image_4.jpg")' }}>
-                                            </a>
-                                            <div className="text p-4">
-                                                <div className="meta mb-2">
-                                                    <div><a href="#">April 07, 2020</a></div>
-                                                    <div><a href="#">Admin</a></div>
-                                                    <div><a href="#" className="meta-chat"><span className="fa fa-comment" /> 3</a></div>
-                                                </div>
-                                                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 d-flex ">
-                                        <div className="blog-entry align-self-stretch">
-                                            <a href="blog-single.html" className="block-20 rounded" style={{ backgroundImage: 'url("../assets/images/image_5.jpg")' }}>
-                                            </a>
-                                            <div className="text p-4">
-                                                <div className="meta mb-2">
-                                                    <div><a href="#">April 07, 2020</a></div>
-                                                    <div><a href="#">Admin</a></div>
-                                                    <div><a href="#" className="meta-chat"><span className="fa fa-comment" /> 3</a></div>
-                                                </div>
-                                                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 d-flex">
-                                        <div className="blog-entry align-self-stretch">
-                                            <a href="blog-single.html" className="block-20 rounded" style={{ backgroundImage: 'url("../assets/images/image_6.jpg")' }}>
-                                            </a>
-                                            <div className="text p-4">
-                                                <div className="meta mb-2">
-                                                    <div><a href="#">April 07, 2020</a></div>
-                                                    <div><a href="#">Admin</a></div>
-                                                    <div><a href="#" className="meta-chat"><span className="fa fa-comment" /> 3</a></div>
-                                                </div>
-                                                <h3 className="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
- */}
 
                         </div>
                     </section>
-
+ */}
 
                 </div>
             </>
