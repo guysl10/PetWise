@@ -8,16 +8,20 @@ import json
 class Views:
     def __init__(self):
         self.firestore_client = db_serv.petwise_serv.firestore_client
+        self._adoption_days = {}
 
     def get_adoption_day_by_id(self, request, document_id):
         adoption_day = self.firestore_client.collection(u'adoption_days').document(document_id).get()
         return HttpResponse(adoption_day)
 
     def get_adoption_days(self, request):
+        if self._adoption_days:
+            return HttpResponse(json.dumps(self._adoption_days))
+
         adoption_days = [doc.get().to_dict() for doc in
                          self.firestore_client.collection(u'adoption_days').list_documents()]
-        days = {'data': adoption_days}
-        return HttpResponse(json.dumps(days))
+        self._adoption_days = {'data': adoption_days}
+        return HttpResponse(json.dumps(self._adoption_days))
 
     def delete_adoption_days(self, request, document_id):
         self.firestore_client.collection(u'adoption_days').document(document_id).delete()
