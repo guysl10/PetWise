@@ -12,7 +12,7 @@ export default function Pet({ description, url, images ,type, name, spec }) {
                 <div className="desc w-100 px-4">
                     <div className="text w-100 mb-3" style={{textAlign: "center"}}>
                         <span>{name}</span>
-                        <h2><Link to={specific}>{type}</Link></h2>
+                        <h2><a href={specific}>{type}</a></h2>
                        
                     </div>
                 </div>
