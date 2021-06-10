@@ -12,16 +12,23 @@ class Views:
         self.auth = petwise_serv.firebase_admin.auth()
         self.db = petwise_serv.firebase_admin.database()
         self.firestore_client = db_serv.petwise_serv.firestore_client
+        self.current_user = None
+        self._is_admin = False
+        self._is_admin_fetched = False
 
     def log_in(self, email, password):
         try:
             self.auth.sign_in_with_email_and_password(email, password)
+            self.current_user = email
         except:
             return HttpResponseBadRequest()
         return HttpResponse("success login")
 
     def log_out(self):
         self.auth.current_user = None
+        self.current_user = None
+        self._is_admin_fetched = False
+        self._is_admin = False
         return HttpResponse("logged out")
 
     def register(self, email, password, username):
@@ -29,21 +36,25 @@ class Views:
             self.auth.create_user_with_email_and_password(email, password)
             self.log_in(email, password)
             self.firestore_client.collection(u'users').add({'email': email, 'is_admin': False, 'username': username})
-        except:
+        except Exception as err:
             return HttpResponseBadRequest()
         return HttpResponse("registered successfully")
 
     def is_logged_in(self, request):
-        return HttpResponse(self.auth.current_user is not None)
+        return HttpResponse(self.current_user is not None)
 
     def is_admin(self):
-        if self.auth.current_user is not None:
-            email = self.auth.current_user['email']
+        if self.current_user is not None and not self._is_admin_fetched:
+            email = self.current_user
             users = self.firestore_client.collection(u'users').get()
             for user in users:
                 if user._data['email'] == email:
-                    return HttpResponse(user._data['is_admin'])
+                    self._is_admin_fetched = True
+                    self._is_admin = user._data['is_admin']
+                    return HttpResponse(self._is_admin)
             return HttpResponseNotFound()
+        elif self._is_admin_fetched:
+            return HttpResponse(self._is_admin)
         else:
             return HttpResponseNotFound()
 
