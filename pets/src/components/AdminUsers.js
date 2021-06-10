@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Article from "../pages/article";
+import UsersAdminTable from "../pages/usersAdminTable";
 
 
 export default function AdminUsers() {
@@ -41,7 +42,7 @@ export default function AdminUsers() {
                                     </thead>
                                     <tbody>
                                         {allusers.map((data, key) => {
-                                    return <userAdminTable key={key} is_admin={data.is_admin} email={data.email} username={data.username} />
+                                    return <UsersAdminTable key={key} email={data.email} username={data.username} is_admin={data.is_admin} />
                                   })}
                                     </tbody></table>
                             </div>

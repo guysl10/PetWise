@@ -43,6 +43,8 @@ export default function Header() {
                 </button>
                         <div className="collapse navbar-collapse" id="ftco-nav">
                             <ul className="navbar-nav ml-auto">
+                                {/* <li className="nav-item"><a href="/contact" className="nav-link">צור קשר</a></li> */}
+                                {/* <li className="nav-item"><a href="/associations" className="nav-link">ארגונים</a></li> */}
                                 <li className="nav-item"><a href="/articles" className="nav-link">כתבות</a></li>
                                 <li className="nav-item"><a href="/pets" className="nav-link">חיות</a></li>
                                 <li className="nav-item"><a href="/adoptionsGallery" className="nav-link">ימי אימוץ</a></li>
