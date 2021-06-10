@@ -21,7 +21,7 @@ class Views:
         documents = list(collection.get())
         return JsonResponse({"len": len(documents)})
 
-    def get_products_count(self, request):
+    def get_adoption_days_count(self, request):
         collection = petwise_serv.firestore_client.collection('adoption_days')
         documents = list(collection.get())
         return JsonResponse({"len": len(documents)})
@@ -31,13 +31,13 @@ class Views:
         query = collection.order_by(
             u'_id', direction=firestore.Query.DESCENDING).limit(3)
         results = query.stream()
-        return HttpResponse(results)
+        return JsonResponse({'data': [result.to_dict() for result in results]})
 
     def get_last_pets(self, request):
         collection = petwise_serv.firestore_client.collection('pets')
         query = collection.order_by(
-            u'מספר מודעה', direction=firestore.Query.DESCENDING).limit(3)
+            u'id', direction=firestore.Query.DESCENDING).limit(3)
         results = query.stream()
-        return HttpResponse(results)
+        return JsonResponse({'data': [result.to_dict() for result in results]})
 
 

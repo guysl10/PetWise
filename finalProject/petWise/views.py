@@ -21,6 +21,11 @@ def get_user(request, user_id):
 
 
 @api_view(['GET'])
+def get_users(request):
+    return connection.Views().get_users(request)
+
+
+@api_view(['GET'])
 def get_articles(request, search='אימוץ חיות'):
     return articles.Views().get_articles(request, search)
 
@@ -180,8 +185,8 @@ def get_products_count(request):
 
 
 @api_view(['GET'])
-def get_adoptions_count(request):
-    return summary.Views().get_adoptions_count(request)
+def get_adoption_days_count(request):
+    return summary.Views().get_adoption_days_count(request)
 
 
 @api_view(['GET'])

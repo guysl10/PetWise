@@ -1,6 +1,7 @@
 import React, { Component , useState } from 'react';
 import AdminInfo from './AdminInfo';
 import AdminOverview from './AdminOverview';
+import AdminUsers from './AdminUsers';
 
 export default function AdminDash() {
 
@@ -27,8 +28,6 @@ const [active, setActive] = useState("general");
                         <div className="w3-bar-block">
                             <a href="#" className="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onClick="w3_close()" title="close menu"><i className="fa fa-remove fa-fw" />&nbsp; Close Menu</a>
                             <a href="#" onClick={() => setActive("general")} className="w3-bar-item w3-button w3-padding"><i className="fa fa-eye fa-fw" />&nbsp; Overview</a>
-                            <a href="#" onClick={() => setActive("pets")} className="w3-bar-item w3-button w3-padding w3-blue"><i className="fa fa-users fa-fw" />&nbsp; Pets</a>
-                            <a href="#" onClick={() => setActive("adoption days")} className="w3-bar-item w3-button w3-padding"><i className="fa fa-users fa-fw" />&nbsp; Adoptions Days</a>
                             <a href="#" onClick={() => setActive("users")} className="w3-bar-item w3-button w3-padding"><i className="fa fa-bank fa-fw" />&nbsp; Users</a>
                         </div>
                     </nav>
@@ -41,14 +40,9 @@ const [active, setActive] = useState("general");
                         </header>
                         <br />
                         <hr />
-
-
                         {/*///////////////////////// CONTENT ////////////////////// */}
-
                         {active == "general"  &&  <AdminOverview page="general" />}
-                        {active == "pets"  &&  <AdminInfo page="pets" />}
-                        {active == "adoption days"  &&  <AdminInfo page="adoption days" />}
-                        {active == "users"  &&  <AdminInfo page="users" />}
+                        {active == "users"  &&  <AdminUsers page="users" />}
 
                     </div>
                 </div>
