@@ -22,13 +22,12 @@ export default function Header() {
                         <div className="col-md-6 d-flex align-items-center">
                             <p className="mb-0 phone pl-md-2">
                                 {isAdmin ?
-                                    <a href="/admin2" className="mr-2"><span className="fa fa-paper-plane mr-1"/> תצוגת
+                                    <a href="/admin" className="mr-2"><span className="fa fa-paper-plane mr-1"/> תצוגת
                                     אדמין</a> :
                                     < a></a>
                                 }
                                 <span> | </span>
                                 {isLoggedIn ?
-                                  
                                     < a href="/logout" className="btn btn-primary ">התנתק</a> :
                                         < a href="/login" className="btn btn-primary "> התחבר</a>
                                     }
