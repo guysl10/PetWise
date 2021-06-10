@@ -8,7 +8,7 @@ export default function Header() {
 
     fetch('http://localhost:8000/petWise/user/is_admin').then(
         response => response.text()).then(
-        data => setIsLoggedIn(data === "True"));
+        data => setIsAdmin(data === "True"));
 
     fetch('http://localhost:8000/petWise/user/is_logged_in').then(
         response => response.text()).then(
@@ -26,8 +26,6 @@ export default function Header() {
                                     אדמין</a> :
                                     < a></a>
                                 }
-                                <a href="/admin2" className="mr-2"><span className="fa fa-paper-plane mr-1"/> תצוגת
-                                    אדמין</a>
                                 <span> | </span>
                                 {isLoggedIn ?
                                     < a href="/logout" className="btn btn-primary ">התנתק</a> :
