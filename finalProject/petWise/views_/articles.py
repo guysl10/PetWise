@@ -5,7 +5,12 @@ import json
 
 @singleton
 class Views:
+    def __init__(self):
+        self._articles = {}
+
     def get_articles(self, request, search='חיות'):
+        if self._articles:
+            return HttpResponse(json.dumps(self._articles))
         googlenews = GoogleNews(lang='he', period='7d', encode='utf-8')
         googlenews.search(search)
         articles = []
@@ -18,5 +23,5 @@ class Views:
             news['datetime'] = str(news['datetime'])
             formatted_articles.append(news)
 
-        data = {'data': formatted_articles}
-        return HttpResponse(json.dumps(data))
+        self._articles = {'data': formatted_articles}
+        return HttpResponse(json.dumps(self._articles))
