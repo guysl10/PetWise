@@ -151,9 +151,12 @@ def edit_product(request, document_id, data):
 
 
 @api_view(['POST'])
-def add_use_analytics(request, data):
-    return use_analytics.Views().add_use_analytics(request, data)
+def add_use_analytics(request):
+    return use_analytics.Views().add_use_analytics(request, request.data.dict())
 
+@api_view(['POST'])
+def get_recommended_pets(request):
+    return use_analytics.Views().get_recommended_pets(request, request.data)
 
 @api_view(['GET'])
 def get_users_count(request):
